@@ -1,4 +1,4 @@
-# leetcode-progress
+# leetcode progress
 Tracking progress and solutions for leetcode algos 🏄‍♂️🏄‍♂️
 
 # About

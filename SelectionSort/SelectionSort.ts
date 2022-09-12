@@ -7,7 +7,7 @@ const selectionSort = (nums: number[]): number[] => {
         let min = i;
 
         // Inner loop to compare each each element against min, resetting min if element is lower
-        for (let j = i; j < nums.length; j++) {
+        for (let j = i + 1; j < nums.length; j++) {
             if (nums[j] < nums[min]) min = j;
         }
 

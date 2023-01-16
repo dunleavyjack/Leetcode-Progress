@@ -14,8 +14,8 @@ class ListNode {
 function hasCycle(head: ListNode | null): boolean {
     // Solution uses tortoise and hare.
     // Initalize one slow pointer and one fast pointer
-    let slow = head;
-    let fast = head;
+    let slow: any = head;
+    let fast: any = head;
 
     // If fast pointer hits null (meaning list has an end), exit loop and return false
     // If not, increase slow pointer by one node and fast pointer by two nodes

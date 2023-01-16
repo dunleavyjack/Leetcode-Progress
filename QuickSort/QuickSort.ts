@@ -1,15 +1,14 @@
-const swap = (indexOne: number, indexTwo: number, arr: number[]): void => {
-  let temp: number = arr[indexOne];
-  arr[indexOne] = arr[indexTwo];
-  arr[indexTwo] = temp;
+const quickSort = (arr: number[], left: number = 0, right: number = arr.legnth - 1): number[] => {
+  let pivotIndex = pivot(arr, left, right)
+  if (left < right) {
+    // Left
+    quickSort(arr, left, pivotIndex - 1);
+
+    // Right
+    quickSort(arr, pivotIndex + 1, right);
+  }
+  return arr
 }
 
-const quickSort = (nums: number[]): number[] => {
-  let index: number = Infinity;
-  for (let i = 0; i < nums.length; i++) {
-    console.log(nums[index])
-  }
-  return nums;
-}
 
 console.log(quickSort([5, 1, 2, 3, 4]))

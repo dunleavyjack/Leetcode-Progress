@@ -1,3 +1,5 @@
+import { ListNode } from '../../Definitions/ListNode';
+
 function middleNode(head: ListNode | null): ListNode | null {
     // Init a fast and slow pointer. The fast pointer will move twice as fast as the slow pointer
     let fast: ListNode | null = head;

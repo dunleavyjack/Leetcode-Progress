@@ -1,3 +1,5 @@
+import { ListNode } from '../../Definitions/ListNode';
+
 function detectCycle(head: ListNode | null): ListNode | null {
     let nodesInList = new Set<ListNode>();
     let currentNode: ListNode | null = head;

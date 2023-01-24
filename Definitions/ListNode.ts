@@ -1,4 +1,4 @@
-//   Definition for singly-linked list.
+//   Leetcode's Typescript Definition for Singly-Linked Lists.
 export class ListNode {
     val: number;
     next: ListNode | null;

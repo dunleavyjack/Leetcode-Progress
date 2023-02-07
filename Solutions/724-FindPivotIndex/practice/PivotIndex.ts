@@ -1,4 +1,4 @@
-function pivotIndex(nums: number[]): number {
+export function pivotIndex(nums: number[]): number {
     let leftSum: number = 0;
     let rightSum: number = 0;
 

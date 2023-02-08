@@ -1,6 +1,4 @@
-export {};
-
-import { ListNode } from '../../Definitions/ListNode';
+import { ListNode } from '../../../Definitions/ListNode';
 
 function mergeTwoLists(
     list1: ListNode | null,
@@ -19,7 +17,6 @@ function mergeTwoLists(
         }
         tail = tail.next;
     }
-
     list1 ? (tail.next = list1) : (tail.next = list2);
 
     return dummyNode.next;

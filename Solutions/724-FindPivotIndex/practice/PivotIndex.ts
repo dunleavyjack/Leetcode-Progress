@@ -1,22 +1,21 @@
-export function pivotIndex(nums: number[]): number {
-    let leftSum: number = 0;
-    let rightSum: number = 0;
+function pivotIndex(nums: number[]): number {
+    let left: number = 0;
+    let right: number = 0;
 
-    // Loop through array and find total sum
     for (let num of nums) {
-        rightSum += num;
+        right += num;
     }
 
     for (let i = 0; i < nums.length; i++) {
-        let potentialPivot: number = nums[i];
-        if (rightSum - potentialPivot === leftSum)
-            return i; // index of the pivot
+        if (left === right - nums[i]) return i;
         else {
-            rightSum -= potentialPivot;
-            leftSum += potentialPivot;
+            left += nums[i];
+            right -= nums[i];
         }
     }
+
     return -1;
 }
 
-console.log(pivotIndex([1, 7, 3, 6, 5, 6]));
+// Space Complexity = 0(n)
+// Time Complexity = 0(1)

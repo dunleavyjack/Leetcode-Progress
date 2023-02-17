@@ -3,11 +3,11 @@ export const runningSum = (nums: number[]): number[] => {
 
     for (let i = 0; i < nums.length; i++) {
         nums[i] += runningTotal;
-        runningTotal += nums[i] - runningTotal; // Not using temp var to be 0(1);
+        runningTotal += nums[i] - runningTotal;
     }
 
     return nums;
 };
 
 // Time complexity  = 0(n);
-// Space complexity = 0(1)
+// Space complexity = 0(1);

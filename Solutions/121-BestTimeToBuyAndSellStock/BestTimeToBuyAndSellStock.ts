@@ -2,20 +2,17 @@ export {};
 
 function maxProfit(prices: number[]): number {
     let maxProfit: number = 0;
+    let left = 0;
+    let right = 1;
 
-    let leftPointer: number = 0;
-    let rightPointer: number = 1;
-
-    while (rightPointer < prices.length) {
-        if (prices[leftPointer] < prices[rightPointer]) {
-            let profit: number = prices[rightPointer] - prices[leftPointer];
-            if (profit > maxProfit) {
-                maxProfit = profit;
-            }
+    while (right < prices.length) {
+        if (prices[left] < prices[right]) {
+            maxProfit = Math.max(maxProfit, prices[right] - prices[left]);
         } else {
-            leftPointer = rightPointer;
+            left = right;
         }
-        rightPointer++;
+        right++;
     }
+
     return maxProfit;
 }

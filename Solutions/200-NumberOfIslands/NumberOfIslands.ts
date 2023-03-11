@@ -35,8 +35,5 @@ function numIslands(grid: string[][]): number {
             }
         }
     }
-
-    console.log(grid);
-
     return islands;
 }

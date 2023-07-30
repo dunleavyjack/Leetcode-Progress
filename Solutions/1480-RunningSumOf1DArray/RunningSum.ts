@@ -1,13 +1,13 @@
-export const runningSum = (nums: number[]): number[] => {
-    let runningTotal: number = 0;
+function runningSum(nums: number[]): number[] {
+    let sum: number = 0;
 
-    for (let i = 0; i < nums.length; i++) {
-        nums[i] += runningTotal;
-        runningTotal += nums[i] - runningTotal; // Not using temp var to be 0(1);
+    for (let i: number = 0; i < nums.length; i++) {
+        sum += nums[i];
+        nums[i] = sum;
     }
 
     return nums;
-};
+}
 
 // Time complexity  = 0(n);
 // Space complexity = 0(1)

@@ -3,12 +3,10 @@ import java.util.Set;
 
 class Solution {
     public boolean containsDuplicate(int[] nums) {
-        Set<Integer> uniqueNums = new HashSet<Integer>();
+        Set<Integer> uniqueNums = new HashSet<>();
 
         for (int num : nums) {
-            if (!uniqueNums.contains(num)) {
-                uniqueNums.add(num);
-            } else {
+            if (!uniqueNums.add(num)) {
                 return true;
             }
         }

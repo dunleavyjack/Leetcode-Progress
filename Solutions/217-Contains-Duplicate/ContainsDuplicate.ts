@@ -1,12 +1,9 @@
-function containsDuplicate(nums: number[]): boolean {
-    const uniqueChars = new Set<number>();
-
-    for (let num of nums) {
-        if (uniqueChars.has(num)) return true;
-        else uniqueChars.add(num);
+function runningSum(nums: number[]): number[] {
+    for (let i = 1; i < nums.length; i++) {
+        nums[i] = nums[i] + nums[i - 1];
     }
 
-    return false;
+    return nums;
 }
 
 // Space complexity -> O(n)

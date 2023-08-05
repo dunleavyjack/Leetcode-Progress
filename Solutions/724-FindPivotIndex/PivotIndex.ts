@@ -1,14 +1,12 @@
 function pivotIndex(nums: number[]): number {
-    let left: number = 0;
-    let right: number = nums.reduce(
-        (totalSum, currentNum) => (totalSum += currentNum)
-    ); // Represent total sum of all numbers
+    let right = nums.reduce((acc, num) => acc + num);
+    let left = 0;
 
     for (let i = 0; i < nums.length; i++) {
-        if (left === right - nums[i]) return i;
+        if (right - nums[i] === left) return i;
         else {
-            left += nums[i];
             right -= nums[i];
+            left += nums[i];
         }
     }
 

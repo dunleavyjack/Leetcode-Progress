@@ -1,29 +1,14 @@
-const mergeStrings = (strOne: string, strTwo: string): string => {
+function mergeAlternately(word1: string, word2: string): string {
+    let result = '';
+    let i = 0;
 
-  let result: string = "";
+    while (i < word1.length && i < word2.length) {
+        result += word1[i];
+        result += word2[i];
+        i++;
+    }
 
-  // Create two pointers
-  let i: number = 0;
-  let j: number = 0;
+    word1.length > i ? (result += word1.slice(i)) : (result += word2.slice(i));
 
-  while (i < strOne.length && j < strTwo.length) {
-    result += strOne[i];
-    result += strTwo[j];
-    i++;
-    j++;
-  }
-
-  while (i < strOne.length) {
-    result += strOne[i];
-    i++;
-  }
-
-  while (j < strTwo.length) {
-    result += strTwo[j];
-    j++;
-  }
-
-  return result;
+    return result;
 }
-
-console.log(mergeStrings("acemmmmmm", "bdf"))

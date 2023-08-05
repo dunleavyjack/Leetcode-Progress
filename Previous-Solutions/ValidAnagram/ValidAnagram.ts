@@ -1,27 +1,25 @@
-function isAnagram(s: string, t: string): boolean {
-    // Create two maps to track frequency of letters in each string
-    let frequencyCounterS = new Map<string, number>();
-    let frequencyCounterT = new Map<string, number>();
+export function isAnagram(s: string, t: string): boolean {
+    // Create two hash maps to track letter frequency in s and t
+    let sFrequency = new Map<string, number>();
+    let tFrequency = new Map<string, number>();
 
-    // Count freq of letters in s
-    for (let i: number = 0; i < s.length; i++) {
-        frequencyCounterS.has(s[i])
-            ? frequencyCounterS.set(s[i], frequencyCounterS.get(s[i])! + 1)
-            : frequencyCounterS.set(s[i], 1);
+    // Check lengths match short circut
+    if (s.length !== t.length) return false;
+
+    // Iterature through s and t to calculate the freq of each letter
+    for (let i = 0; i < s.length; i++) {
+        if (sFrequency.has(s[i]))
+            sFrequency.set(s[i], sFrequency.get(s[i])! + 1);
+        else sFrequency.set(s[i], 1);
+
+        if (tFrequency.has(t[i]))
+            tFrequency.set(t[i], tFrequency.get(t[i])! + 1);
+        else tFrequency.set(t[i], 1);
     }
 
-    // Counter freq of letters in t
-    for (let j: number = 0; j < t.length; j++) {
-        frequencyCounterT.has(t[j])
-            ? frequencyCounterT.set(t[j], frequencyCounterT.get(t[j])! + 1)
-            : frequencyCounterT.set(t[j], 1);
+    for (let [key, _value] of sFrequency) {
+        if (sFrequency.get(key) !== tFrequency.get(key)) return false;
     }
 
-    // Compare both frequency counters to see if one letter is used more
-    for (let [key, value] of frequencyCounterS) {
-        if (frequencyCounterT.get(key) !== value) return false;
-    }
-
-    // Check that the lengths are the same (no extra letters) and return
-    return frequencyCounterS.size === frequencyCounterT.size ? true : false;
+    return true;
 }

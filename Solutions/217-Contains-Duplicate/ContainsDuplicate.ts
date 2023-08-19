@@ -1,10 +1,10 @@
-function runningSum(nums: number[]): number[] {
-    for (let i = 1; i < nums.length; i++) {
-        nums[i] = nums[i] + nums[i - 1];
+function containsDuplicate(nums: number[]): boolean {
+    const set = new Set<number>();
+
+    for (let num of nums) {
+        if (set.has(num)) return true;
+        else set.add(num);
     }
 
-    return nums;
+    return false;
 }
-
-// Space complexity -> O(n)
-// Time complexity -> 0(n)

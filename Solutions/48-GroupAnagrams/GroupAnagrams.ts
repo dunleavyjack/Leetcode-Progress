@@ -1,22 +1,25 @@
-function groupAnagrams(strs: string[]): string[][] {
-    let hashmap = new Map<string, string[]>(); /// [0,0,0,2,0,0,1,0...] to 26
-    const a = 'a';
+export function groupAnagrams(strs: string[]): string[][] {
+    const hashMap = new Map<number[], string[]>();
+    const aCharCode = 'a'.charCodeAt(0);
+    let result: string[][] = [];
 
-    for (let word of strs) {
+    for (let s of strs) {
         let count: number[] = new Array(26).fill(0);
-        for (let i = 0; i < word.length; i++) {
-            count[word.charCodeAt(i) - a.charCodeAt(0)] += 1;
+        for (let letter of s) {
+            count[letter.charCodeAt(0) - aCharCode] += 1;
         }
 
-        hashmap.has(count.toString())
-            ? hashmap.set(count.toString(), [
-                  ...hashmap.get(count.toString())!,
-                  word,
-              ])
-            : hashmap.set(count.toString(), [word]);
+        if (hashMap.has(count)) {
+            const curr = hashMap.get(count) as string[];
+            hashMap.set(count, [...curr, s]);
+        } else {
+            hashMap.set(count, [s]);
+        }
     }
 
-    return Array.from(hashmap.values());
-}
+    for (const [_key, value] of hashMap) {
+        result.push(value);
+    }
 
-console.log(groupAnagrams(['eat', 'tea', 'tan', 'ate', 'nat', 'bat']));
+    return result;
+}

@@ -1,7 +1,7 @@
 function topKFrequent(nums: number[], k: number): number[] {
     const hash = new Map<number, number>();
     const freq = new Array(nums.length + 1).fill([] as number[]);
-    const result = [];
+    const result: number[] = [];
 
     // Create normal frequency hash table
     for (let num of nums) hash.set(num, hash.get(num)! + 1 || 1);

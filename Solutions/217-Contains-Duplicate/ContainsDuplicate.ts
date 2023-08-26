@@ -3,7 +3,7 @@ function containsDuplicate(nums: number[]): boolean {
 
     for (let num of nums) {
         if (set.has(num)) return true;
-        else set.add(num);
+        set.add(num);
     }
 
     return false;

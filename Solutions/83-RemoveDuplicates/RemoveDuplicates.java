@@ -1,4 +1,4 @@
-import Definitions.ListNode;
+import Definitions.ListNode.ListNode;
 
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {

@@ -1,4 +1,4 @@
-function productExceptSelf(nums: number[]): number[] {
+export function productExceptSelf(nums: number[]): number[] {
     let result = new Array(nums.length).fill(1);
 
     let prefix = 1;

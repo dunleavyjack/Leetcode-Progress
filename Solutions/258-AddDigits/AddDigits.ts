@@ -1,4 +1,4 @@
-function addDigits(num: number): number {
+export function addDigits(num: number): number {
     if (String(num).length === 1) return num;
     else {
         let sum = 0;

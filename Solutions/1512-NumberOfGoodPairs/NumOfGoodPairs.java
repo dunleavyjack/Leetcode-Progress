@@ -3,7 +3,7 @@ import java.util.Map;
 
 class Solution {
     public int numIdenticalPairs(int[] nums) {
-        int numOfGoodPairs = 0;
+        int numOfPairs = 0;
         Map<Integer, Integer> freqCounter = new HashMap<>();
 
         for (int num : nums) {
@@ -16,10 +16,10 @@ class Solution {
 
         for (Map.Entry<Integer, Integer> entry : freqCounter.entrySet()) {
             if (entry.getValue() > 1) {
-                numOfGoodPairs += entry.getValue() * (entry.getValue() - 1) / 2;
+                numOfPairs += entry.getValue() * (entry.getValue() - 1) / 2;
             }
         }
 
-        return numOfGoodPairs;
+        return numOfPairs;
     }
 }

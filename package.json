@@ -1,0 +1,10 @@
+{
+  "name": "leetcode-progress",
+  "version": "1.0.0",
+  "description": "Tracking progress and solutions for leetcode questions, mostly in TypeScript and Java 🏄‍♂️🏄‍♂️",
+  "scripts": {
+    "question": "./add_question.sh",   
+  },
+  "author": "Jack Dunleavy",
+  "license": "ISC"
+}

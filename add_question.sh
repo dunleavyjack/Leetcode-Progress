@@ -20,7 +20,7 @@ else
 fi
 
 # Create a TypeScript file with the specified name inside the folder
-file_name="$full_folder_path/$folder_name.ts"
+file_name="$full_folder_path/$question_name.ts"
 if [ ! -e "$file_name" ]; then
   touch "$file_name"
   echo "Created TypeScript file: $file_name"

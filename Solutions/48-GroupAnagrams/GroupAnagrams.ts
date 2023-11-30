@@ -6,7 +6,7 @@ export function groupAnagrams(strs: string[]): string[][] {
     for (let word of strs) {
         let bucket = new Array(26).fill(0);
 
-        for (let letter of word) bucket[letter.charCodeAt(0) - aCharCode] += 1;
+        for (let letter of word) bucket[letter.charCodeAt(0) - aCharCode]++;
 
         map.set(bucket.toString(), [
             ...(map.get(bucket.toString()) || []),

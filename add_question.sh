@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# A script for generating a folder and empty TypeScript file based on a provided Leetcode question name.
+#
+# Example: 
+#
+# `npm run quesion 999 TestQuestion` 
+#
+# Generates a folder named 999-TestQuestion containing a file called TestQuestion.ts.
+
 # Check if two arguments were provided
 if [ $# -ne 2 ]; then
   echo "Usage: create_question.sh <question_number> <question_name>"

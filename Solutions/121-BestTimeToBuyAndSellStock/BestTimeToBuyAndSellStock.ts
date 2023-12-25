@@ -1,17 +1,14 @@
 export {};
 
 function maxProfit(prices: number[]): number {
-    let left = 0;
-    let right = 1;
-    let max = 0;
+    let p1,
+        max = 0;
+    let p2 = 1;
 
-    while (right < prices.length) {
-        if (prices[left] < prices[right]) {
-            max = Math.max(max, prices[right] - prices[left]);
-        } else {
-            left = right;
-        }
-        right++;
+    for (let i = 0; i < prices.length, p2 < prices.length; i++, p2++) {
+        if (prices[p1] < prices[p2])
+            max = Math.max(max, prices[p2] - prices[p1]);
+        else p1 = p2;
     }
 
     return max;

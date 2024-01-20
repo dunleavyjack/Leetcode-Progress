@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions';
+import { TreeNode } from '../../types';
 
 function sumEvenGrandparent(root: TreeNode | null): number {
     let result = 0;

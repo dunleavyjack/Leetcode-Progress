@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 function inorderTraversal(root: TreeNode | null): number[] {
     let result: number[] = [];

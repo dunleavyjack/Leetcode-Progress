@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions';
+import { TreeNode } from '../../types';
 
 function findMode(root: TreeNode | null): number[] {
     let freqMap = new Map<number, number>(/** {num, freq} */);

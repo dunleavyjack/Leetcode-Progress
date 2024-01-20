@@ -1,4 +1,4 @@
-import { ListNode } from '../../../Definitions/ListNode';
+import { ListNode } from '../../../types';
 
 function reverseList(head: ListNode | null): ListNode | null {
     if (!head) return null;

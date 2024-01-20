@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions';
+import { TreeNode } from '../../types';
 
 function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
     const leafValue1 = [];

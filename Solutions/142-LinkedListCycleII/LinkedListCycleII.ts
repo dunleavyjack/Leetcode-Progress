@@ -1,4 +1,4 @@
-import { ListNode } from '../../Definitions/ListNode';
+import { ListNode } from '../../types';
 
 function detectCycle(head: ListNode | null): ListNode | null {
     let nodesInList = new Set<ListNode>();

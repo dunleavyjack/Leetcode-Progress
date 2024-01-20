@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode';
+import { TreeNode } from '../../types';
 
 function isValidBST(root: TreeNode | null): boolean {
     const isValid = (

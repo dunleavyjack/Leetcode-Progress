@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions';
+import { TreeNode } from '../../types';
 
 function diameterOfBinaryTree(root: TreeNode | null): number {
     let result: number[] = [0];

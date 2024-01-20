@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 function isSameTree(p: TreeNode | null, q: TreeNode | null): boolean {
     if (!p && !q) return true;

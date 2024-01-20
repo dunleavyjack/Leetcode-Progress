@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode';
+import { TreeNode } from '../../types';
 
 function lowestCommonAncestor(
     root: TreeNode | null,

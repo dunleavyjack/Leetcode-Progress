@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 function searchBST(root: TreeNode | null, val: number): TreeNode | null {
     if (!root) return null;

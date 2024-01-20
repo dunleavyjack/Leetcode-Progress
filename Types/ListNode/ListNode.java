@@ -1,4 +1,4 @@
-package Definitions.ListNode;
+package types.ListNode;
 
 public class ListNode {
     public int val;

@@ -1,4 +1,4 @@
-import { Node } from '../../Definitions/NAryTreeNode/NAryTreeNode';
+import { Node } from '../../types';
 
 function preorder(root: Node | null): number[] {
     const addVal = (node: Node | null, res: number[]): number[] | undefined => {

@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions';
+import { TreeNode } from '../../types';
 
 function rangeSumBST(root: TreeNode | null, low: number, high: number): number {
     let result = 0;

@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 function largestValues(root: TreeNode | null): number[] {
     const levelMap = new Map<number, number[]>(); // {largest val: }

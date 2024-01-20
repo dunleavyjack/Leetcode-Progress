@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 export function isSymmetric(root: TreeNode | null): boolean {
     return isSymmetricNodes(root!.left, root!.right);

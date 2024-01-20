@@ -1,4 +1,4 @@
-import Definitions.TreeNode.*;
+import Types.TreeNode.*;
 
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {

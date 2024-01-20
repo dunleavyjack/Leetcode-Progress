@@ -1,4 +1,4 @@
-import { ListNode } from '../../Definitions';
+import { ListNode } from '../../types';
 
 function deleteNode(node: ListNode | null): void {
     if (!node) return;

@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 /**
  * * **Question**: Given the roots of two binary trees p and q, write a function to check if they are the same or not.

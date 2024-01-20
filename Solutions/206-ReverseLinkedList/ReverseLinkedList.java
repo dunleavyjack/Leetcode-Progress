@@ -1,4 +1,4 @@
-import Definitions.ListNode.ListNode;
+import Types.ListNode.ListNode;
 
 class Solution {
     public ListNode reverseList(ListNode head) {

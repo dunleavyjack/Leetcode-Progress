@@ -1,4 +1,4 @@
-import { ListNode } from '../../Definitions/ListNode';
+import { ListNode } from '../../types';
 
 function deleteDuplicates(head: ListNode | null): ListNode | null {
     let current = head;

@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 function invertTree(root: TreeNode | null): TreeNode | null {
     if (!root) return null;

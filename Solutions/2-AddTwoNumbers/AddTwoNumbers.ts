@@ -1,4 +1,4 @@
-import { ListNode } from '../../Definitions';
+import { ListNode } from '../../types';
 
 function addTwoNumbers(
     l1: ListNode | null,

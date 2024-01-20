@@ -1,4 +1,4 @@
-import { TreeNode } from '../../Definitions/TreeNode/TreeNode';
+import { TreeNode } from '../../types';
 
 function isSubtree(root: TreeNode | null, subRoot: TreeNode | null): boolean {
     if (!subRoot) return true;

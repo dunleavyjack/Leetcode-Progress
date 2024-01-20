@@ -1,6 +1,6 @@
 export {};
 
-import { ListNode } from '../../Definitions/ListNode';
+import { ListNode } from '../../types';
 
 function mergeTwoLists(
     list1: ListNode | null,

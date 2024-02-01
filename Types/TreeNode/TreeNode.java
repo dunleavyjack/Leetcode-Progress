@@ -1,4 +1,4 @@
-package Definitions.TreeNode;
+package Types.TreeNode;
 
 public class TreeNode {
     public int val;

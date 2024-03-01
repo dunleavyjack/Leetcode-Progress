@@ -1,4 +1,6 @@
 
+import Types.ListNode.ListNode;
+
 class Solution {
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;

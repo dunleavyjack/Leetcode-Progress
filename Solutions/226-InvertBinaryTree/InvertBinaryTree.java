@@ -1,4 +1,4 @@
-import types.TreeNode.TreeNode;
+import Types.TreeNode.TreeNode;
 
 class Solution {
     public TreeNode invertTree(TreeNode root) {

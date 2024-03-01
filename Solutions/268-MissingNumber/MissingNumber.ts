@@ -14,4 +14,6 @@ function missingNumber(nums: number[]): number {
             return sortedNums.length;
         }
     }
+
+    return -1;
 }

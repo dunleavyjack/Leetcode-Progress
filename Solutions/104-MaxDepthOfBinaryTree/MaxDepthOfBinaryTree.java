@@ -1,4 +1,4 @@
-import Definitions.TreeNode.TreeNode;
+import Types.TreeNode.TreeNode;
 
 class Solution {
     public int maxDepth(TreeNode root) {

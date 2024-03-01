@@ -1,4 +1,4 @@
-import Definitions.TreeNode.TreeNode;
+import Types.TreeNode.TreeNode;
 
 class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {

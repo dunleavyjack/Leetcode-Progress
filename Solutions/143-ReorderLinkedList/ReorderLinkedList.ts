@@ -11,7 +11,6 @@ function reorderList(head: ListNode | null): void {
     }
 
     let mid = slow;
-    console.log(mid);
 
     // 2. Reverse second half of list
     let prev: ListNode | null = null;

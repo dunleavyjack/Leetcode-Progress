@@ -1,5 +1,10 @@
-import { TreeNode } from '../../types';
+import { TreeNode } from "../../types";
 
-function maxDepth(root: TreeNode | null): number {
-    return root ? 1 + Math.max(maxDepth(root.right), maxDepth(root.left)) : 0;
+export function maxDepth(root: TreeNode | null): number {
+  if (!root) return 0;
+
+  const left = maxDepth(root.left);
+  const right = maxDepth(root.right);
+
+  return 0 + Math.max(left, right);
 }

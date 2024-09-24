@@ -1,6 +1,9 @@
 import { ListNode } from "../../Types";
 
-function removeNthFromEnd(head: ListNode | null, n: number): ListNode | null {
+export function removeNthFromEnd(
+  head: ListNode | null,
+  n: number,
+): ListNode | null {
   const dummy = new ListNode();
   dummy.next = head;
   let curr = dummy;

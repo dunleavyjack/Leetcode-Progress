@@ -1,27 +1,25 @@
-import { ListNode } from '../../types';
+import { ListNode } from "../../types";
 
-function addTwoNumbers(
-    l1: ListNode | null,
-    l2: ListNode | null
+export function addTwoNumbers(
+  l1: ListNode | null,
+  l2: ListNode | null,
 ): ListNode | null {
-    let dummy = new ListNode();
-    let current = dummy;
+  let carryOver = 0;
+  let dummy = new ListNode();
+  let tail = dummy;
 
-    let carry = 0;
+  while (l1 || l2 || carryOver) {
+    let total = carryOver + (l1?.val ?? 0) + (l2?.val ?? 0);
+    carryOver = Math.floor(total / 10);
+    total = total % 10;
 
-    while (l1 || l2 || carry) {
-        const v1 = l1?.val ?? 0;
-        const v2 = l2?.val ?? 0;
+    const newNode = new ListNode(total);
+    tail.next = newNode;
+    tail = tail.next;
 
-        let total = v1 + v2 + carry;
-        carry = Math.floor(total / 10);
-        total = total % 10;
-        current.next = new ListNode(total);
+    if (l1) l1 = l1.next;
+    if (l2) l2 = l2.next;
+  }
 
-        current = current.next;
-        if (l1) l1 = l1?.next;
-        if (l2) l2 = l2?.next;
-    }
-
-    return dummy.next;
+  return dummy.next;
 }

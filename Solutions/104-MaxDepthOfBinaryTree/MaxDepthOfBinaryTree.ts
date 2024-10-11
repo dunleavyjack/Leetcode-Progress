@@ -6,5 +6,5 @@ export function maxDepth(root: TreeNode | null): number {
   const left = maxDepth(root.left);
   const right = maxDepth(root.right);
 
-  return 0 + Math.max(left, right);
+  return Math.max(left, right) + 1;
 }

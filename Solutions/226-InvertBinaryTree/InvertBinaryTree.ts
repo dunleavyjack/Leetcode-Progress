@@ -1,14 +1,14 @@
-import { TreeNode } from '../../types';
+import { TreeNode } from "../../types";
 
-function invertTree(root: TreeNode | null): TreeNode | null {
-    if (!root) return null;
+export function invertTree(root: TreeNode | null): TreeNode | null {
+  if (!root) return null;
 
-    const temp = root.left;
-    root.left = root.right;
-    root.right = temp;
+  const temp = root.left;
+  root.left = root.right;
+  root.right = temp;
 
-    invertTree(root.left);
-    invertTree(root.right);
+  invertTree(root.left);
+  invertTree(root.right);
 
-    return root;
+  return root;
 }

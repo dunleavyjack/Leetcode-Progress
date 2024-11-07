@@ -1,18 +1,28 @@
-import { TreeNode } from '../../types';
+import { TreeNode } from "../../types";
 
-function diameterOfBinaryTree(root: TreeNode | null): number {
-    let result: number[] = [0];
+export function diameterOfBinaryTree(root: TreeNode | null): number {
+  let maxDiameter = 0;
 
-    const dfs = (root) => {
-        if (!root) return -1;
-        const left = dfs(root.left);
-        const right = dfs(root.right);
+  /**
+   * This recursive dfs function will calculate and return the max height of the current node.
+   * It also calculates the current diameter, and compares it with the `maxDiameter`.
+   */
+  function dfs(node: TreeNode | null) {
+    if (!node) return 0;
 
-        result[0] = Math.max(result[0], 2 + left + right);
+    // Calculate the max height of the left and right nodes
+    const left = dfs(node.left);
+    const right = dfs(node.right);
+    const currentDiameter = left + right;
 
-        return 1 + Math.max(left, right);
-    };
+    // Check to see if the current diameter is greater than the max diameter
+    maxDiameter = Math.max(maxDiameter, currentDiameter);
 
-    dfs(root);
-    return result[0];
+    // Return the height
+    return Math.max(left, right) + 1;
+  }
+
+  dfs(root);
+
+  return maxDiameter;
 }

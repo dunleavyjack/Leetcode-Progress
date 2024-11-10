@@ -1,20 +1,17 @@
-import { TreeNode } from '../../types';
+import { TreeNode } from "../../Types";
 
-function lowestCommonAncestor(
-    root: TreeNode | null,
-    p: TreeNode | null,
-    q: TreeNode | null
+export function lowestCommonAncestor(
+  root: TreeNode | null,
+  p: TreeNode | null,
+  q: TreeNode | null,
 ): TreeNode | null {
-    let curr = root;
+  if (!root) return null;
 
-    while (curr) {
-        if (curr.val < p!.val && curr.val < q!.val) {
-            curr = curr.right;
-        } else if (curr.val > p!.val && curr.val > q!.val) {
-            curr = curr.left;
-        } else return curr;
-    }
-
-    // TS return type safety check
-    return curr;
+  if (root.val > p!.val && root.val > q!.val) {
+    return lowestCommonAncestor(root.left, p, q);
+  } else if (root.val < p!.val && root.val < q!.val) {
+    return lowestCommonAncestor(root.right, p, q);
+  } else {
+    return root;
+  }
 }

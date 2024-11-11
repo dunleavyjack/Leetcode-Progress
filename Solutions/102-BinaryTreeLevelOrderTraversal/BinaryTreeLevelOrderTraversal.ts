@@ -1,36 +1,22 @@
-import { TreeNode } from '../../types';
+import { TreeNode } from "../../types";
 
-function levelOrder(root: TreeNode | null): number[][] {
-    const levelMap = new Map<number, number[]>();
+export function levelOrder(root: TreeNode | null): number[][] {
+  // Use an array of arrays to store the levels.
+  // The index is the level, and the values are stored in that inner array
+  let levels: number[][] = [];
 
-    const levelTraversalHelper = (
-        node: TreeNode | null,
-        levelMap: Map<number, number[]>,
-        level: number
-    ) => {
-        if (!node) return;
+  function dfs(node: TreeNode | null, level = 0) {
+    if (!node) return;
 
-        if (node.left) {
-            levelMap.set(level, [
-                ...(levelMap.get(level) || []),
-                node.left.val,
-            ]);
-            levelTraversalHelper(node.left, levelMap, level + 1);
-        }
+    // Make sure an empty array exists at the level before pushing, then push the value
+    if (!levels[level]) levels.push([]);
+    levels[level].push(node.val);
 
-        if (node.right) {
-            levelMap.set(level, [
-                ...(levelMap.get(level) || []),
-                node.right.val,
-            ]);
-            levelTraversalHelper(node.right, levelMap, level + 1);
-        }
-    };
+    // Call recursively on the left and right nodes
+    dfs(node.left, level + 1);
+    dfs(node.right, level + 1);
+  }
 
-    if (!root) return [];
-    else levelMap.set(1, [root.val]);
-
-    levelTraversalHelper(root, levelMap, 2);
-
-    return Array.from(levelMap.values());
+  dfs(root);
+  return levels;
 }

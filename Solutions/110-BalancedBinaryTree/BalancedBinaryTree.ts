@@ -6,16 +6,15 @@ export function isBalanced(root: TreeNode | null): boolean {
 
     const [isBalancedLeft, maxHeightLeft] = dfs(node.left);
     const [isBalancedRight, maxHeightRight] = dfs(node.right);
-
-    const isBalanced =
+    const maxHeight = Math.max(maxHeightLeft, maxHeightRight);
+    const isSubtreeBalanced =
       isBalancedLeft &&
       isBalancedRight &&
       Math.abs(maxHeightLeft - maxHeightRight) <= 1;
-    const maxHeight = 1 + Math.max(maxHeightLeft, maxHeightRight);
 
-    return [isBalanced, maxHeight];
+    return [isSubtreeBalanced, maxHeight + 1];
   }
 
-  const [isTreeBalanced] = dfs(root);
-  return isTreeBalanced;
+  const [isBalanced] = dfs(root);
+  return isBalanced;
 }

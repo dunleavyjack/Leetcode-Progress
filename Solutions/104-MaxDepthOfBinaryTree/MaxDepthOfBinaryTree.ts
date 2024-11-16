@@ -6,8 +6,8 @@ export function maxDepth(root: TreeNode | null): number {
 
     const maxHeightLeft = dfs(node.left);
     const maxHeightRight = dfs(node.right);
-
     const maxHeight = Math.max(maxHeightLeft, maxHeightRight);
+
     return maxHeight + 1;
   }
 

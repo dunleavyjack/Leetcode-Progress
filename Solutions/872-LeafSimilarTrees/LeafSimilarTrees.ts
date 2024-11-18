@@ -1,25 +1,44 @@
-import { TreeNode } from '../../types';
+import { TreeNode } from "../../Types";
 
-function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
-    const leafValue1 = [];
-    const leafValue2 = [];
+export function leafSimilar(
+  root1: TreeNode | null,
+  root2: TreeNode | null,
+): boolean {
+  /*
+   * Helper function for assembling the leaves for each root.
+   */
+  function collectLeaves(root: TreeNode | null) {
+    const leaves: number[] = [];
 
-    traverse(root1, leafValue1);
-    traverse(root2, leafValue2);
+    /**
+     * Inner recursive dfs function to traverse each tree
+     */
+    function dfs(node: TreeNode | null) {
+      if (!node) return;
 
-    if (leafValue1.length !== leafValue2.length) return false;
+      // If the node has no left or right children, it is a "leaf"
+      // So, push it to the `leaves` array
+      if (!node.left && !node.right) {
+        leaves.push(node.val);
+      }
 
-    for (let i = 0; i < leafValue1.length; i++) {
-        if (leafValue1[i] !== leafValue2[i]) return false;
+      // Call on left and right side
+      dfs(node.left);
+      dfs(node.right);
     }
 
-    return true;
-}
+    dfs(root);
+    return leaves;
+  }
 
-function traverse(node: TreeNode | null, leafValueSeq: number[] = []) {
-    if (!node) return;
-    if (!node.left && !node.right) leafValueSeq.push(node.val);
+  const leaves1 = collectLeaves(root1);
+  const leaves2 = collectLeaves(root2);
 
-    traverse(node.left, leafValueSeq);
-    traverse(node.right, leafValueSeq);
+  // Compare both leaves arrays. First, for same length and then for similar values
+  if (leaves1.length !== leaves2.length) return false;
+  for (let i = 0; i < leaves1.length; i++) {
+    if (leaves1[i] !== leaves2[i]) return false;
+  }
+
+  return true;
 }

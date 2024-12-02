@@ -1,5 +1,8 @@
 class KthFactorOfNSolution {
-    fun kthFactor(n: Int, k: Int): Int {
+    fun kthFactor(
+        n: Int,
+        k: Int,
+    ): Int {
         var currFactor = 1
         var kthFactor = k
 

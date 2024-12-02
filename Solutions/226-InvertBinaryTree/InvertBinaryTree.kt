@@ -1,6 +1,6 @@
 class Solution {
     fun invertTree(root: TreeNode?): TreeNode? {
-        if(root == null) return null
+        if (root == null) return null
 
         val temp = root.left
         root.left = root.right

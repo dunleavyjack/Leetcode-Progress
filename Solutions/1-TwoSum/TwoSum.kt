@@ -1,5 +1,8 @@
 class Solution {
-    fun twoSum(nums: IntArray, target: Int): IntArray {
+    fun twoSum(
+        nums: IntArray,
+        target: Int,
+    ): IntArray {
         val hashMap = HashMap<Int, Int>() // {compliment, index}
 
         for (i in nums.indices) {

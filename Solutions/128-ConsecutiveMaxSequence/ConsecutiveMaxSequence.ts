@@ -1,17 +1,22 @@
 function longestConsecutive(nums: number[]): number {
-    let set = new Set<number>(nums);
-    let maxSeq = 0;
-    let potentialSeq = 0;
+  // Create a set of all unique characters from nums
+  const uniqueNums = new Set(nums);
+  let maxSequence = 0;
 
-    for (let num of nums) {
-        if (!set.has(num - 1)) {
-            while (set.has(num + potentialSeq)) {
-                potentialSeq++;
-            }
-            maxSeq = Math.max(maxSeq, potentialSeq);
-            potentialSeq = 0;
-        }
+  // Iterate through the set, checking if it doesn't contain a number one less than the current.
+  // This means, the current number could be the start of a subsequence.
+  for (let num of uniqueNums) {
+    if (!uniqueNums.has(num - 1)) {
+      // Then, increment current sequence as long as num + 1 exists in the set.
+      let currentSequenceLength = 1;
+      while (uniqueNums.has(num + currentSequenceLength)) {
+        currentSequenceLength++;
+      }
+
+      // Compare with the max sequece and set to the greatest value
+      maxSequence = Math.max(currentSequenceLength, maxSequence);
     }
+  }
 
-    return maxSeq;
+  return maxSequence;
 }

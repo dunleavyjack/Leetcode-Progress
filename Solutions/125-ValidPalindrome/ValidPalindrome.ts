@@ -1,13 +1,19 @@
 function isPalindrome(s: string): boolean {
-	s = s.replace(/\W|_/g, "").toLowerCase(); // Remove spaces, special characters (commas), and make lowercase
-	let left = 0;
-	let right = s.length - 1;
+  // Sanitize string to remove all non-alphanumberic characters and apply lowercase
+  s = s.replace(/\W|_/g, "").toLowerCase();
 
-	while (left < right) {
-		if (s[left] !== s[right]) return false;
-		left++;
-		right--;
-	}
+  // Initialize two pointers, one at 0 and one at the last index in the array
+  let left = 0;
+  let right = s.length - 1;
 
-	return true;
+  // Make sure the values at both pointers is the same, then bring them closer together.
+  // Using `<=` instead of `<` here to account for palindromes with an odd numbered length
+  while (left <= right) {
+    if (s[left] !== s[right]) return false;
+    left++;
+    right--;
+  }
+
+  // If this line is reached, then the input was a palindrome
+  return true;
 }

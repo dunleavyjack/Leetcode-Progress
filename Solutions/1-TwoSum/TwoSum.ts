@@ -1,17 +1,21 @@
 function twoSum(nums: number[], target: number): number[] {
-	const visitedNums = new Map<number, number>(); // {num, index}
-	let result: number[] = [];
+  const visitedNums = new Map<number, number>(); // { num, index }
 
-	for (let i = 0; i < nums.length; i++) {
-		const compliment = target - nums[i];
+  // Iterate through all nums
+  for (let i = 0; i < nums.length; i++) {
+    // The "compliment" is the number we need to sum to target
+    const compliment = target - nums[i];
 
-		if (visitedNums.has(compliment)) {
-			result = [visitedNums.get(compliment)!, i];
-			break;
-		} else {
-			visitedNums.set(nums[i], i);
-		}
-	}
+    // If the compliment is already stored in the map, return the current
+    // index as well as the index stored in the map
+    if (visitedNums.has(compliment)) {
+      return [visitedNums.get(compliment)!, i];
+    }
 
-	return result;
+    // Otherwise, add the current number and it's index to the compliment
+    visitedNums.set(nums[i], i);
+  }
+
+  // Return this if no two nums summing to the target are found
+  return [-1, -1];
 }

@@ -1,18 +1,29 @@
 function topKFrequent(nums: number[], k: number): number[] {
-    const hash = new Map<number, number>();
-    const freq = new Array(nums.length + 1).fill([] as number[]);
-    const result: number[] = [];
+  const result: number[] = [];
 
-    // Create normal frequency hash table
-    for (let num of nums) hash.set(num, hash.get(num)! + 1 || 1);
+  // Create a map to keep track of the frequency of all nums
+  const frequencyOfNums = new Map<number, number>(); // { nums, numsFrequency }
 
-    // Use the vales of the hash table to create a bucket sort array
-    for (const [key, value] of hash) freq[value] = [...freq[value], key];
+  // Iterate through the `nums` array, using the hashmap to track frequency
+  for (const num of nums) {
+    frequencyOfNums.set(num, (frequencyOfNums.get(num) || 0) + 1);
+  }
 
-    // Iterate backwards though the bucket array adding values to the result
-    for (let i = freq.length - 1; i >= 0 && result.length < k; i--) {
-        freq[i].length && freq[i].forEach((num: number) => result.push(num));
-    }
+  // Create an array to sort the nums by their frequency
+  const frequencyArray = Array(nums.length + 1).fill([]);
 
-    return result;
+  // Group numbers by their frequency in the array
+  for (const [num, frequency] of frequencyOfNums) {
+    frequencyArray[frequency] = [...frequencyArray[frequency], num];
+  }
+
+  // Iterate backwards through the frequency array until k elements are reached
+  for (let i = frequencyArray.length - 1; i >= 0 && result.length < k; i--) {
+    if (!frequencyArray[i].length) continue;
+    frequencyArray[i].forEach((num: number) => {
+      result.push(num);
+    });
+  }
+
+  return result;
 }

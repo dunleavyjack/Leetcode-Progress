@@ -1,13 +1,24 @@
 function twoSum(numbers: number[], target: number): number[] {
-    let p1 = 0;
-    let p2 = numbers.length - 1;
+  // Create two pointers, one at each end
+  let left = 0;
+  let right = numbers.length - 1;
 
-    while (p1 < p2) {
-        if (numbers[p1] + numbers[p2] === target) return [p1 + 1, p2 + 1];
+  // While left is not equal to right, sum the values that both pointers point to.
+  // If that number is less than the target, increment left. Otherwise, decrement right.
+  while (left < right) {
+    const sum = numbers[left] + numbers[right];
 
-        if (numbers[p1] + numbers[p2] > target) p2--;
-        else p1++;
+    // Check if target is reached. If so return,
+    // adding 1 because for some reason the result should be 1 indexed
+    if (sum === target) return [left + 1, right + 1];
+
+    if (sum < target) {
+      left++;
+    } else {
+      right--;
     }
+  }
 
-    return [];
+  // Return [-1, -1] if no pair is found
+  return [-1, -1];
 }

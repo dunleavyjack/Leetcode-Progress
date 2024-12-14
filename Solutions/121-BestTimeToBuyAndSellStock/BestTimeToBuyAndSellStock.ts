@@ -1,15 +1,23 @@
 function maxProfit(prices: number[]): number {
-	let p1 = 0;
-	let p2 = 0;
-	let maxProfit = 0;
+  // Create two pointers, and a variable to track max value
+  let max = 0;
+  let left = 0;
+  let right = 1;
 
-	while (p2 < prices.length) {
-		if (prices[p1] < prices[p2]) {
-			maxProfit = Math.max(maxProfit, prices[p2] - prices[p1]);
-		} else p1 = p2;
+  // Iterate until right reaches the end of `prices`
+  while (right < prices.length) {
+    // Calculate current profit, and compare with the current max
+    const profit = prices[right] - prices[left];
+    max = Math.max(max, profit);
 
-		p2++;
-	}
+    // If the left price is lower than the right, jump the left pointer to the right
+    if (prices[left] > prices[right]) {
+      left = right;
+    }
+    // No matter what, increment the right
+    right++;
+  }
 
-	return maxProfit;
+  // Return the best result
+  return max;
 }

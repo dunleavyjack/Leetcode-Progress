@@ -1,22 +1,24 @@
 function isValid(s: string): boolean {
-  let stack: string[] = [];
+  // Create a stack to track visited open parens
+  const openParens: string[] = [];
 
-  if (s.length % 2 !== 0) return false;
-
+  // Iterate through the characters of s.
+  // If you visit an open paren, add it to the stack, otherwise see if it matches the last one in the stack
   for (let char of s) {
-    if (char === "{" || char === "(" || char === "[") {
-      stack.push(char);
+    if (char === "(" || char === "{" || char === "[") {
+      openParens.push(char);
     } else {
-      const lastInStack = stack.pop();
+      const lastOpenParen = openParens.pop();
       if (
-        (char === "}" && lastInStack !== "{") ||
-        (char === "]" && lastInStack !== "[") ||
-        (char === ")" && lastInStack !== "(")
+        !lastOpenParen ||
+        (lastOpenParen === "(" && char !== ")") ||
+        (lastOpenParen === "[" && char !== "]") ||
+        (lastOpenParen === "{" && char !== "}")
       )
         return false;
     }
   }
 
-  if (stack.length) return false;
-  return true;
+  // Important: Check if the stack has any length before returning true!
+  return openParens.length ? false : true;
 }

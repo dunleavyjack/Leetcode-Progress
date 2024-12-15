@@ -13,7 +13,10 @@ function romanToInt(s: string): number {
   // Initialize and set a result variable to 0
   let result = 0;
 
-  // Iterate backwards!! through the input string
+  // Iterate backwards!! through the input string.
+  // Check if the current character is one of the special "subtraction" ones.
+  // If it is, and the "previous symbol" is one that gets decreased by it, decrease the total and continue out of the loop.
+  // Otherwise, add the value of that symbol to the result
   for (let i = s.length - 1; i >= 0; i--) {
     const symbol = s[i];
     const previousSymbol = s[i + 1]; // Note: Previous symbol visited going backwards through string.
@@ -24,7 +27,7 @@ function romanToInt(s: string): number {
         previousSymbol &&
         (previousSymbol === "V" || previousSymbol === "X")
       ) {
-        result--;
+        result -= RomanSymbolToInt[symbol];
         continue;
       }
     }
@@ -35,7 +38,7 @@ function romanToInt(s: string): number {
         previousSymbol &&
         (previousSymbol === "L" || previousSymbol === "C")
       ) {
-        result -= 10;
+        result -= RomanSymbolToInt[symbol];
         continue;
       }
     }
@@ -46,11 +49,12 @@ function romanToInt(s: string): number {
         previousSymbol &&
         (previousSymbol === "D" || previousSymbol === "M")
       ) {
-        result -= 100;
+        result -= RomanSymbolToInt[symbol];
         continue;
       }
     }
 
+    // Otherwise, add the total
     result += RomanSymbolToInt[symbol];
   }
 

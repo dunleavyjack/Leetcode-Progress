@@ -1,38 +1,34 @@
 function isValidSudoku(board: string[][]): boolean {
-    let rows = Array(9)
-        .fill(0)
-        .map(() => new Set());
-    let cols = Array(9)
-        .fill(0)
-        .map(() => new Set());
-    let boxes = Array(9)
-        .fill(0)
-        .map(() => new Set());
+  // Contains all visited nums from the board.
+  // They are stored using this pattern: "position-positionNum-positionValue"
+  const seen = new Set<string>();
 
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board[0].length; j++) {
-            if (board[i][j] === '.') continue;
-            else if (
-                rows[i].has(board[i][j]) ||
-                cols[j].has(board[i][j]) ||
-                boxes[getSubgridIndex([i, j])].has(board[i][j])
-            ) {
-                return false;
-            } else {
-                rows[i].add(board[i][j]);
-                cols[j].add(board[i][j]);
-                boxes[getSubgridIndex([i, j])].add(board[i][j]);
-            }
-        }
+  // Iterate through each cell in the grid
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board.length; col++) {
+      const cell = board[row][col];
+
+      // If the cell is "empty", skip
+      if (cell == ".") continue;
+
+      // This formula finds the "subgrid index"
+      const grid = Math.floor(row / 3) * 3 + Math.floor(col / 3);
+
+      // Check if the current num is appears horizontal, verically, or in the same grid
+      if (
+        seen.has(`row-${row}-${cell}`) ||
+        seen.has(`col-${col}-${cell}`) ||
+        seen.has(`grid-${grid}-${cell}`)
+      )
+        return false;
+
+      // If not, add it to the row, column, and grid
+      seen.add(`row-${row}-${cell}`);
+      seen.add(`col-${col}-${cell}`);
+      seen.add(`grid-${grid}-${cell}`);
     }
+  }
 
-    return true;
-}
-
-function getSubgridIndex(point: number[]) {
-    const subgridRow = Math.floor(point[0] / 3);
-    const subgridCol = Math.floor(point[1] / 3);
-    const subgridIndex = subgridRow * (9 / 3) + subgridCol;
-
-    return subgridIndex;
+  // If this is reached, the sudoku is valid
+  return true;
 }

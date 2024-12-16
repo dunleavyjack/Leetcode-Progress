@@ -1,4 +1,4 @@
-function topKFrequent(nums: number[], k: number): number[] {
+export function topKFrequent(nums: number[], k: number): number[] {
   const result: number[] = [];
 
   // Create a map to keep track of the frequency of all nums

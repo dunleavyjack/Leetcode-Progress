@@ -1,27 +1,25 @@
 function search(nums: number[], target: number): number {
-  // Create two pointers, one at the start and one at the end
+  // Create two points, one at the start of the array and one at the end.
   let left = 0;
   let right = nums.length - 1;
 
-  // Interate until left is greate than right, or vice verse.
-  // This handles odd numbered input cases
+  // Continue to iterate until the left is <= right. The reason for <= is to cover odd numbered inputs.
   while (left <= right) {
-    // The middle index should be half of the right and the left, considering their current positions
-    const midIndex = Math.floor((left + right) / 2);
-    // You don't need this, but I like adding the specific number as a variable.
-    const numAtMidIndex = nums[midIndex];
+    // Calculate the middle index in the array. Keep in mind left and right will change later on.
+    const mid = Math.floor((left + right) / 2);
+    // Check to see if you found the value
+    if (nums[mid] === target) return mid;
 
-    // Check if it is the target. Happy Path!
-    if (numAtMidIndex === target) return midIndex;
-
-    // Likely, it's not. So, check if the middle number is less/greater than the target.
-    if (numAtMidIndex < target) {
-      left = midIndex + 1;
+    // If the target is larger than the number at the "middle" index, it means the
+    // result is in the right side of the mid. Move the left to mid.
+    if (target > nums[mid]) {
+      left = mid + 1;
     } else {
-      right = midIndex - 1;
+      // Otherwise, do the opposite with the right pointer.
+      right = mid - 1;
     }
   }
 
-  // Default return
+  // Return -1 if not found.
   return -1;
 }

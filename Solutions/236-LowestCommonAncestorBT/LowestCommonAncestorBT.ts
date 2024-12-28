@@ -16,15 +16,15 @@ export function lowestCommonAncestor(
 
   // Recursively check the left and right subtrees for a "valid" node.
   // "Valid" meaning it contains p or q
-  const validNodeLeft = lowestCommonAncestor(root.left, p, q);
-  const validNodeRight = lowestCommonAncestor(root.right, p, q);
+  const validLeftNode = lowestCommonAncestor(root.left, p, q);
+  const validRightNode = lowestCommonAncestor(root.right, p, q);
 
   // If the both left and right are valid, we have found the LCA. Return it.
   // Otherwise, we need to keep checking, so any valid node (will detault to null if
   // none have been found yet).
-  if (validNodeLeft && validNodeRight) {
+  if (validLeftNode && validRightNode) {
     return root;
   } else {
-    return validNodeLeft || validNodeRight;
+    return validLeftNode || validRightNode;
   }
 }

@@ -1,29 +1,28 @@
 function validPalindrome(s: string): boolean {
-  let left = 0;
-  let right = s.length - 1;
-
-  while (left <= right) {
-    if (s[left] !== s[right]) {
-      return (
-        isValidPalindrome(s, left + 1, right) ||
-        isValidPalindrome(s, left, right - 1)
-      );
-    }
-    left++;
-    right--;
-  }
-
-  return true;
+  return isValid(s, 0, s.length - 1, true);
 }
 
-function isValidPalindrome(s: string, left: number, right: number) {
-  console.log(s);
-  while (left <= right) {
-    if (s[left] !== s[right]) return false;
-    else {
-      left++;
-      right--;
-    }
+function isValid(
+  s: string,
+  left: number,
+  right: number,
+  removalRemaining: boolean,
+) {
+  // Base case: if left exceeds right, or they are equal then input is a palindrome
+  if (left >= right) return true;
+
+  // Both
+  if (s[left] === s[right]) {
+    return isValid(s, left + 1, right - 1, removalRemaining);
+  } else {
+    // Check if a removal already happened. If so, return false.
+    if (!removalRemaining) return false;
+
+    // Check if a palidrome exists after removing from the left and the right, and update removal remaining to false.
+    removalRemaining = false;
+    return (
+      isValid(s, left + 1, right, removalRemaining) ||
+      isValid(s, left, right - 1, removalRemaining)
+    );
   }
-  return true;
 }

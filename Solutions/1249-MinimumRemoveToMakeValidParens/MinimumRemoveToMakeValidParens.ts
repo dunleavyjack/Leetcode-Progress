@@ -1,29 +1,31 @@
 function minRemoveToMakeValid(s: string): string {
-  let numOpen = 0;
-  let numClosed = 0;
-  let firstPass = "";
-  let secondPass = "";
+  let validOpen = 0;
+  let validClosed = 0;
 
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === "(") numOpen++;
-    else if (s[i] === ")") {
-      if (numClosed >= numOpen) continue;
-      else numClosed++;
+  for (let char of s) {
+    if (char === "(") {
+      validOpen++;
+    } else if (char === ")") {
+      if (validOpen === validClosed) continue;
+      validClosed++;
     }
-    firstPass += s[i];
   }
 
-  numOpen = 0;
-  numClosed = 0;
+  validOpen = Math.min(validOpen, validClosed);
+  validClosed = Math.min(validOpen, validClosed);
 
-  for (let i = firstPass.length - 1; i >= 0; i--) {
-    if (firstPass[i] === ")") numClosed++;
-    else if (firstPass[i] === "(") {
-      if (numOpen >= numClosed) continue;
-      else numOpen++;
+  let result = "";
+  for (let char of s) {
+    if (char === "(") {
+      if (!validOpen) continue;
+      validOpen--;
+    } else if (char === ")") {
+      if (!validClosed || validOpen === validClosed) continue;
+      validClosed--;
     }
-    secondPass = firstPass[i] + secondPass;
+
+    result += char;
   }
 
-  return secondPass;
+  return result;
 }

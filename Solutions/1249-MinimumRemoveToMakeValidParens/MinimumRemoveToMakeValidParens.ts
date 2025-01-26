@@ -1,31 +1,48 @@
 function minRemoveToMakeValid(s: string): string {
-  let validOpen = 0;
-  let validClosed = 0;
+  let open = 0;
+  let closed = 0;
+  let firstPass = "";
 
   for (let char of s) {
-    if (char === "(") {
-      validOpen++;
-    } else if (char === ")") {
-      if (validOpen === validClosed) continue;
-      validClosed++;
+    // Character is a letter
+    if (char !== "(" && char !== ")") {
+      firstPass += char;
+      // Character is an open paren
+    } else if (char === "(") {
+      open++;
+      firstPass += char;
+      // Character is a closed paren
+    } else {
+      if (closed < open) {
+        firstPass += char;
+        closed++;
+      }
     }
   }
 
-  validOpen = Math.min(validOpen, validClosed);
-  validClosed = Math.min(validOpen, validClosed);
+  // Reset open and closed and create a new var for the result
+  open = 0;
+  closed = 0;
+  let secondPass = "";
 
-  let result = "";
-  for (let char of s) {
-    if (char === "(") {
-      if (!validOpen) continue;
-      validOpen--;
+  for (let i = firstPass.length - 1; i >= 0; i--) {
+    const char = firstPass[i];
+
+    // Character is a letter
+    if (char !== "(" && char !== ")") {
+      secondPass = char + secondPass;
+      // Character is an open paren (going backwards)
     } else if (char === ")") {
-      if (!validClosed || validOpen === validClosed) continue;
-      validClosed--;
+      open++;
+      secondPass = char + secondPass;
+      // Character is a closed paren (going backwards)
+    } else {
+      if (closed < open) {
+        closed++;
+        secondPass = char + secondPass;
+      }
     }
-
-    result += char;
   }
 
-  return result;
+  return secondPass;
 }

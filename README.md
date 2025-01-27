@@ -12,7 +12,7 @@ My [Leetcode Account](https://leetcode.com/jack_joseph/) :)
 
 To make life easier, I wrote a
 [shell script](https://github.com/dunleavyjack/Leetcode-Progress/blob/main/add_question.sh)
-that generates everything I need to organize my solutions. It creates:
+that generates everything I need when I add a new solution. It creates:
 
 - A folder for the problem
 - A `.ts` file for the code

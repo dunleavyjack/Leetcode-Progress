@@ -10,8 +10,9 @@ My [Leetcode Account](https://leetcode.com/jack_joseph/) :)
 
 ## Generator for New Questions
 
-To make life easier, I wrote a handy shell script that generates everything I
-need to start solving a new problem. It creates:
+To make life easier, I wrote a
+[shell script](https://github.com/dunleavyjack/Leetcode-Progress/blob/main/add_question.sh)
+that generates everything I need to organize my solutions. It creates:
 
 - A folder for the problem
 - A `.ts` file for the code
@@ -23,7 +24,7 @@ The command is:
 npm run question <QuestionNumber> <QuestionName>
 ```
 
-For example:
+So, for example, I just write:
 
 ```shell
 npm run question 1 TwoSum

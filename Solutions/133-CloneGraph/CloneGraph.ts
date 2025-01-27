@@ -5,34 +5,24 @@ export function cloneGraph(node: _Node | null): _Node | null {
 
   const copiedNodes = new Map<_Node, _Node>();
 
-  function copyNodesDFS(node: _Node | null) {
-    if (!node || copiedNodes.has(node)) return;
+  function dfs(node: _Node): _Node {
+    // If a copy already exists in the map, return it
+    if (copiedNodes.has(node)) {
+      return copiedNodes.get(node) as _Node;
+    }
 
+    // Otherwise, create a copy and add it to the map
     const copiedNode = new _Node(node.val);
     copiedNodes.set(node, copiedNode);
 
+    // Recursively copy all neighbors
     for (const n of node.neighbors) {
-      copyNodesDFS(n);
+      copiedNode.neighbors.push(dfs(n));
     }
+
+    // Always return the copied node
+    return copiedNode;
   }
 
-  function setNeighborsForCopiedNodes(node: _Node | null) {
-    if (
-      !node ||
-      (copiedNodes.has(node) && copiedNodes.get(node)!.neighbors.length > 0)
-    )
-      return;
-
-    const copiedNode = copiedNodes.get(node);
-    for (const n of node.neighbors) {
-      const copiedNeighbor = copiedNodes.get(n) as _Node;
-      copiedNode!.neighbors.push(copiedNeighbor);
-      setNeighborsForCopiedNodes(n);
-    }
-  }
-
-  copyNodesDFS(node);
-  setNeighborsForCopiedNodes(node);
-
-  return copiedNodes.get(node) as _Node;
+  return dfs(node);
 }

@@ -8,7 +8,7 @@ My [Leetcode Account](https://leetcode.com/jack_joseph/) :)
 
 ---
 
-## Generator for New Questions
+## Generator Script for Organizing Solutions
 
 To make life easier, I wrote a
 [shell script](https://github.com/dunleavyjack/Leetcode-Progress/blob/main/add_question.sh)

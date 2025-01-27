@@ -1,18 +1,19 @@
 function minAddToMakeValid(s: string): number {
-  let openParens: string[] = [];
-  let numOfAdds = 0;
+  let open = 0;
+  let closed = 0;
+  let amountToAdd = 0;
 
-  for (const char of s) {
-    if (char === "(") {
-      openParens.push(char);
+  for (let char of s) {
+    if (char == "(") {
+      open++;
     } else {
-      if (!openParens.length) {
-        numOfAdds++;
+      if (closed < open) {
+        closed++;
       } else {
-        openParens.pop();
+        amountToAdd++;
       }
     }
   }
 
-  return numOfAdds + openParens.length;
+  return amountToAdd + (open - closed);
 }

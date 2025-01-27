@@ -16,7 +16,7 @@ that generates everything I need when I add a new solution. It creates:
 
 - A folder for the problem
 - A `.ts` file for the code
-- A `.md` file for solution explanations and tips for future me
+- A `.md` file for a solution explanation and tips for future me
 
 The command is:
 

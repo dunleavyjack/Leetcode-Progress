@@ -44,7 +44,14 @@ formatted_question_name=$(echo "$question_name" | sed 's/\([a-z]\)\([A-Z]\)/\1 \
 # Create a Markdown notes file with the specified format and initial content
 md_file_name="$full_folder_path/$question_name.notes.md"
 if [ ! -e "$md_file_name" ]; then
-  echo "# Notes: LC $question_number $formatted_question_name" >"$md_file_name"
+  {
+    echo "# Notes: LC $question_number $formatted_question_name"
+    echo ""
+    echo "| Time   | Space |"
+    echo "| ------ | ----- |"
+    echo "| O(n)   | O(n)  |"
+  } >"$md_file_name"
+
   echo "Created Markdown notes file: $md_file_name"
 else
   echo "File '$md_file_name' already exists. Skipping file creation."

@@ -1,20 +1,24 @@
-export function groupAnagrams(strs: string[]): string[][] {
-    let map = new Map<string, string[]>();
-    let result: string[][] = [];
-    let aCharCode = 'a'.charCodeAt(0);
+function groupAnagrams(strs: string[]): string[][] {
+  const anagramMap = new Map<string, string[]>(); // { stringifiedCharFreq, stringsWithSameFreq }
 
-    for (let word of strs) {
-        let bucket = new Array(26).fill(0);
+  for (let word of strs) {
+    const charFreqBucket = Array.from({ length: 26 }, () => 0);
 
-        for (let letter of word) bucket[letter.charCodeAt(0) - aCharCode]++;
-
-        map.set(bucket.toString(), [
-            ...(map.get(bucket.toString()) || []),
-            word,
-        ]);
+    for (let char of word) {
+      const charAlphabetOrder = getCharAlphabetOrder(char);
+      charFreqBucket[charAlphabetOrder]++;
     }
 
-    for (const [_key, value] of map) result.push(value);
+    const anagramMapKey = charFreqBucket.toString();
+    anagramMap.set(anagramMapKey, [
+      ...(anagramMap.get(anagramMapKey) || []),
+      word,
+    ]);
+  }
 
-    return result;
+  return [...anagramMap.values()];
+}
+
+function getCharAlphabetOrder(char: string) {
+  return char.charCodeAt(0) - "a".charCodeAt(0);
 }

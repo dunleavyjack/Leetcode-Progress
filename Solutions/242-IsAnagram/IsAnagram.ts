@@ -1,17 +1,17 @@
 function isAnagram(s: string, t: string): boolean {
-    const freqMapS = new Map<string, number>();
-    const freqMapT = new Map<string, number>();
+  let freqS = new Map<string, number>();
+  let freqT = new Map<string, number>();
 
-    if (s.length !== t.length) return false;
+  if (s.length !== t.length) return false;
 
-    for (let i = 0; i < s.length; i++) {
-        freqMapS.set(s[i], (freqMapS.get(s[i]) || 0) + 1);
-        freqMapT.set(t[i], (freqMapT.get(t[i]) || 0) + 1);
-    }
+  for (let i = 0; i < s.length; i++) {
+    freqS.set(s[i], (freqS.get(s[i]) || 0) + 1);
+    freqT.set(t[i], (freqT.get(t[i]) || 0) + 1);
+  }
 
-    for (const [key, value] of freqMapS) {
-        if (freqMapT.get(key) !== value) return false;
-    }
+  for (let [char, freq] of freqS) {
+    if (freqT.get(char) !== freq) return false;
+  }
 
-    return true;
+  return true;
 }

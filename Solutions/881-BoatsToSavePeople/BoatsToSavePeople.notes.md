@@ -2,7 +2,7 @@
 
 | Time       | Space |
 | ---------- | ----- |
-| 0(n log n) | 0(1)  |
+| O(n log n) | O(1)  |
 
 Started by sorting the input. I tried bubble and quick sort but both exceeded
 the time limit. Went with JS's built-in sort, in a pinch, instead. Once the

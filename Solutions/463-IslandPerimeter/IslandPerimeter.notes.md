@@ -9,4 +9,4 @@ perimeter by one. This can be done in the dfs call's base case.
 
 | Time      | Space     |
 | --------- | --------- |
-| 0(r \* c) | 0(r \* c) |
+| O(r \* c) | O(r \* c) |

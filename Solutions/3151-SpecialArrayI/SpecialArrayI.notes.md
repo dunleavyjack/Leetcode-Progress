@@ -11,4 +11,4 @@ array, checking if the sum of the two is odd or even.
 
 | Time | Space |
 | ---- | ----- |
-| 0(n) | 0(1)  |
+| O(n) | O(1)  |

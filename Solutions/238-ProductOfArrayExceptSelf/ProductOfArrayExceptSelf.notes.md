@@ -14,3 +14,7 @@ the opposite direction.
 Tip: When going backwards, be care to multiple the initial iteration by the
 `postfix` instead of directly setting it (as in the first iteration). This way,
 the last value in the result is not hardcoded as `1`.
+
+| Time | Space                                                            |
+| ---- | ---------------------------------------------------------------- |
+| O(n) | O(1) \*Not including the result array (special to this question) |

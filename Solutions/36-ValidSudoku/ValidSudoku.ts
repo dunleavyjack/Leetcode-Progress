@@ -1,34 +1,26 @@
 function isValidSudoku(board: string[][]): boolean {
-  // Contains all visited nums from the board.
-  // They are stored using this pattern: "position-positionNum-positionValue"
   const seen = new Set<string>();
+  const numRows = board.length;
+  const numCols = board[0].length;
 
-  // Iterate through each cell in the grid
-  for (let row = 0; row < board.length; row++) {
-    for (let col = 0; col < board.length; col++) {
-      const cell = board[row][col];
+  for (let row = 0; row < numRows; row++) {
+    for (let col = 0; col < numCols; col++) {
+      const num = board[row][col];
+      if (num === ".") continue;
 
-      // If the cell is "empty", skip
-      if (cell == ".") continue;
-
-      // This formula finds the "subgrid index"
       const grid = Math.floor(row / 3) * 3 + Math.floor(col / 3);
+      const rowKey = `row-${row}-${num}`;
+      const colKey = `col-${col}-${num}`;
+      const gridKey = `grid-${grid}-${num}`;
 
-      // Check if the current num is appears horizontal, verically, or in the same grid
-      if (
-        seen.has(`row-${row}-${cell}`) ||
-        seen.has(`col-${col}-${cell}`) ||
-        seen.has(`grid-${grid}-${cell}`)
-      )
+      if (seen.has(rowKey) || seen.has(colKey) || seen.has(gridKey))
         return false;
 
-      // If not, add it to the row, column, and grid
-      seen.add(`row-${row}-${cell}`);
-      seen.add(`col-${col}-${cell}`);
-      seen.add(`grid-${grid}-${cell}`);
+      seen.add(rowKey);
+      seen.add(colKey);
+      seen.add(gridKey);
     }
   }
 
-  // If this is reached, the sudoku is valid
   return true;
 }

@@ -1,24 +1,35 @@
-function isValid(s: string): boolean {
-  // Create a stack to track visited open parens
+enum SQUARE {
+  OPEN = "[",
+  CLOSED = "]",
+}
+
+enum SQUIGGLE {
+  OPEN = "{",
+  CLOSED = "}",
+}
+
+enum PAREN {
+  OPEN = "(",
+  CLOSED = ")",
+}
+
+export function isValid(s: string): boolean {
   const openParens: string[] = [];
 
-  // Iterate through the characters of s.
-  // If you visit an open paren, add it to the stack, otherwise see if it matches the last one in the stack
-  for (let char of s) {
-    if (char === "(" || char === "{" || char === "[") {
+  for (const char of s) {
+    if (char === SQUARE.OPEN || char === SQUIGGLE.OPEN || char === PAREN.OPEN)
       openParens.push(char);
-    } else {
-      const lastOpenParen = openParens.pop();
+    else {
+      const lastParen = openParens.pop();
       if (
-        !lastOpenParen ||
-        (lastOpenParen === "(" && char !== ")") ||
-        (lastOpenParen === "[" && char !== "]") ||
-        (lastOpenParen === "{" && char !== "}")
+        !lastParen ||
+        (char === SQUARE.CLOSED && lastParen !== SQUARE.OPEN) ||
+        (char === SQUIGGLE.CLOSED && lastParen !== SQUIGGLE.OPEN) ||
+        (char === PAREN.CLOSED && lastParen !== PAREN.OPEN)
       )
         return false;
     }
   }
 
-  // Important: Check if the stack has any length before returning true!
-  return openParens.length ? false : true;
+  return !openParens.length;
 }

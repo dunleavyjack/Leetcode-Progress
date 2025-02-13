@@ -1,31 +1,26 @@
 export function trap(height: number[]): number {
-  const maxLeft = new Array(height.length).fill(0);
-  const maxRight = new Array(height.length).fill(0);
+  let maxes: [number, number][] = Array.from({ length: height.length }, () => [
+    0, 0,
+  ]); // [maxToLeft, maxToRight]
+  let maxLeft = 0;
+  let maxRight = 0;
 
-  let rainWater = 0;
-
-  // Iterate through the input array calcualting the prefix height
-  let max = 0;
   for (let i = 0; i < height.length; i++) {
-    max = Math.max(max, height[i]);
-    maxLeft[i] = max;
+    maxes[i][0] = maxLeft;
+    maxLeft = Math.max(maxLeft, height[i]);
   }
 
-  // Reset max
-  max = 0;
-
-  // Iterate through the input array *backwards* calcualting the suffix height
   for (let i = height.length - 1; i >= 0; i--) {
-    max = Math.max(max, height[i]);
-    maxRight[i] = max;
+    maxes[i][1] = maxRight;
+    maxRight = Math.max(maxRight, height[i]);
   }
 
-  // Iterate through the input array again, using the prefix and suffix arrays to determine
-  // the amount of rain water. For each index, the prefixMax will contain the current max up
-  // until that point and the suffixMax will contain the current max from the other side.
+  let water = 0;
   for (let i = 0; i < height.length; i++) {
-    rainWater += Math.min(maxLeft[i], maxRight[i]) - height[i];
+    const [maxToTheLeft, maxToTheRight] = maxes[i];
+    const currWater = Math.min(maxToTheLeft, maxToTheRight) - height[i];
+    water += currWater > 0 ? currWater : 0;
   }
 
-  return rainWater;
+  return water;
 }

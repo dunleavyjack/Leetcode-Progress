@@ -1,3 +1,8 @@
+enum PAREN {
+  OPEN = "(",
+  CLOSED = ")",
+}
+
 enum SQUARE {
   OPEN = "[",
   CLOSED = "]",
@@ -8,24 +13,23 @@ enum SQUIGGLE {
   CLOSED = "}",
 }
 
-enum PAREN {
-  OPEN = "(",
-  CLOSED = ")",
-}
+function isValid(s: string): boolean {
+  let openParens: string[] = [];
 
-export function isValid(s: string): boolean {
-  const openParens: string[] = [];
-
-  for (const char of s) {
-    if (char === SQUARE.OPEN || char === SQUIGGLE.OPEN || char === PAREN.OPEN)
-      openParens.push(char);
+  for (let paren of s) {
+    if (
+      paren === PAREN.OPEN ||
+      paren === SQUARE.OPEN ||
+      paren === SQUIGGLE.OPEN
+    )
+      openParens.push(paren);
     else {
-      const lastParen = openParens.pop();
+      const lastOpenParen = openParens.pop();
       if (
-        !lastParen ||
-        (char === SQUARE.CLOSED && lastParen !== SQUARE.OPEN) ||
-        (char === SQUIGGLE.CLOSED && lastParen !== SQUIGGLE.OPEN) ||
-        (char === PAREN.CLOSED && lastParen !== PAREN.OPEN)
+        !lastOpenParen ||
+        (paren === PAREN.CLOSED && lastOpenParen !== PAREN.OPEN) ||
+        (paren === SQUARE.CLOSED && lastOpenParen !== SQUARE.OPEN) ||
+        (paren === SQUIGGLE.CLOSED && lastOpenParen !== SQUIGGLE.OPEN)
       )
         return false;
     }

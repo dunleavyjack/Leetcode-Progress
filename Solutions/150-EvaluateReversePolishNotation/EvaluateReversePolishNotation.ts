@@ -1,37 +1,35 @@
+enum OPERATORS {
+  ADD = "+",
+  SUBTRACT = "-",
+  MULTIPLY = "*",
+  DIVIDE = "/",
+}
+
 function evalRPN(tokens: string[]): number {
-  let stack: number[] = [];
+  let numStack: number[] = [];
 
   for (let token of tokens) {
-    // Addition
-    if (token === "+") {
-      const lastNum = stack.pop() as number;
-      const firstNum = stack.pop() as number;
-      stack.push(firstNum + lastNum);
-
-      // Subtraction
-    } else if (token === "-") {
-      const lastNum = stack.pop() as number;
-      const firstNum = stack.pop() as number;
-      stack.push(firstNum - lastNum);
-
-      // Division (truncating towards 0)
-    } else if (token === "/") {
-      const lastNum = stack.pop() as number;
-      const firstNum = stack.pop() as number;
-      stack.push(Math.trunc(firstNum / lastNum));
-
-      // Multiplication
-    } else if (token === "*") {
-      const lastNum = stack.pop() as number;
-      const firstNum = stack.pop() as number;
-      stack.push(firstNum * lastNum);
-
-      // Otherwise, push the number to the stack
+    if (isNumber(token)) {
+      numStack.push(Number(token));
     } else {
-      stack.push(Number(token));
+      const secondNum = numStack.pop() as number;
+      const firstNum = numStack.pop() as number;
+
+      if (token === OPERATORS.ADD) {
+        numStack.push(firstNum + secondNum);
+      } else if (token === OPERATORS.SUBTRACT) {
+        numStack.push(firstNum - secondNum);
+      } else if (token === OPERATORS.DIVIDE) {
+        numStack.push(Math.trunc(firstNum / secondNum));
+      } else if ((token = OPERATORS.MULTIPLY)) {
+        numStack.push(firstNum * secondNum);
+      }
     }
   }
 
-  // Since the stack contains the running total, return it
-  return stack[0];
+  return numStack[0];
+}
+
+function isNumber(char: string) {
+  return !isNaN(Number(char));
 }

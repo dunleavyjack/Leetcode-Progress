@@ -17,3 +17,7 @@ Tips:
 
 - The stack you build is "monotonic", which means it is sorted (accidentally) in
   decreasing order.
+
+| Time | Space |
+| ---- | ----- |
+| O(n) | O(n)  |

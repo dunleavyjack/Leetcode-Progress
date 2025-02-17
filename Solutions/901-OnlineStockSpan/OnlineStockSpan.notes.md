@@ -13,7 +13,7 @@ For example, if the prices are `[5, 1, 2, 3]`, the stack will look like
 than or equal to `3`. From price `5`, there is only one. Prices `1` and `2` are
 "skipped" and added to the span for price `3`, making the runtime more
 efficient. If a new price is added, for example `6`, the stack will become
-`[6, 5]`, since 6 is greater than both 3 (which spans 3 prices) and 5 (which
+`[[6, 5]]`, since 6 is greater than both 3 (which spans 3 prices) and 5 (which
 spans 1). 3 + 1 + 1 = 5, considering that 6 adds a new span of 1.
 
 In the code, the idea is to consider each new price as having a span of 1, and

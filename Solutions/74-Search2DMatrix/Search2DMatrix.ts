@@ -5,8 +5,7 @@ function searchMatrix(matrix: number[][], target: number): boolean {
     if (target > row[row.length - 1]) continue;
 
     // Perform binary search to find if the value exists.
-    const isTargetPresent = binarySearch(row, target);
-    return isTargetPresent;
+    return binarySearch(row, target);
   }
 
   // Return false by default

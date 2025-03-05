@@ -1,50 +1,44 @@
+enum Seperator {
+  Char = "-",
+  Word = "#",
+}
+
 /**
  * Encodes a list of strings to a single string.
  */
 function encode(strs: string[]): string {
-  let stringifiedStrs = "";
-
+  let encodedWords = "";
   strs.forEach((word, i) => {
-    let stringifiedWord = "";
-    for (const char of word) {
-      const charCode = char.charCodeAt(0);
-      const stringifiedLetter = charCode + ",";
-      stringifiedWord += stringifiedLetter;
+    let encodedWord = "";
+    for (let i = 0; i < word.length; i++) {
+      let encodedChar = String(word.charCodeAt(i));
+      if (i < word.length - 1) encodedChar += Seperator.Char; // Add sperator if not last char
+      encodedWord += encodedChar;
     }
-
-    // Append "#" after each word, unless it is the last one
-    // This causes an additional [""] to be added when decoding with `.split("#")`
-    if (i !== strs.length - 1) stringifiedWord += "#";
-    stringifiedStrs += stringifiedWord;
+    if (i < strs.length - 1) encodedWord += Seperator.Word; // Add seperator if not last word
+    encodedWords += encodedWord;
   });
 
-  return stringifiedStrs;
+  return encodedWords;
 }
-
-/**
- 
- */
 
 /**
  * Decodes a single string to a list of strings.
  */
 function decode(s: string): string[] {
-  const words: string[] = [];
-  console.log(s);
-
-  const stringifedWords = s.split("#");
-  for (const stringifedWord of stringifedWords) {
-    let word = "";
-    const charCodes = stringifedWord.split(",");
-
-    for (const charCode of charCodes) {
-      if (charCode === "") continue;
-      word += String.fromCharCode(Number(charCode));
+  let decodedWords: string[] = [];
+  const encodedWords = s.split(Seperator.Word);
+  for (let encodedWord of encodedWords) {
+    let decodedWord = "";
+    const encodedChars = encodedWord.split(Seperator.Char);
+    for (let encodedChar of encodedChars) {
+      if (!encodedChar) continue;
+      decodedWord += String.fromCharCode(Number(encodedChar));
     }
-    words.push(word);
+    decodedWords.push(decodedWord);
   }
 
-  return words;
+  return decodedWords;
 }
 
 /**

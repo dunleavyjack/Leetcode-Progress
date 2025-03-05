@@ -9,3 +9,7 @@ separated with an arbitrary separator. Then, each word is also separated with an
 arbitrary separator.
 
 To decode, split the input by word and then by character and decode.
+
+| Time      | Space     |
+| --------- | --------- |
+| O(n \* m) | O(n \* m) |

@@ -1,24 +1,27 @@
 function isValidSudoku(board: string[][]): boolean {
-  const seen = new Set<string>();
-  const numRows = board.length;
-  const numCols = board[0].length;
+  let visitedCells = new Set<string>(); // row-${rowNum}-${num} || col-${colNum}-${num} || box-${boxNum}-${num}
 
-  for (let row = 0; row < numRows; row++) {
-    for (let col = 0; col < numCols; col++) {
-      const num = board[row][col];
-      if (num === ".") continue;
+  for (let row = 0; row < board.length; row++) {
+    for (let col = 0; col < board[0].length; col++) {
+      const cellVal = board[row][col];
+      if (cellVal === ".") continue;
 
-      const grid = Math.floor(row / 3) * 3 + Math.floor(col / 3);
-      const rowKey = `row-${row}-${num}`;
-      const colKey = `col-${col}-${num}`;
-      const gridKey = `grid-${grid}-${num}`;
+      const rowKey = `row-${row}-${cellVal}`;
+      const colKey = `col-${col}-${cellVal}`;
 
-      if (seen.has(rowKey) || seen.has(colKey) || seen.has(gridKey))
+      const box = ~~(row / 3) * 3 + ~~(col / 3);
+      const boxKey = `box-${box}-${cellVal}`;
+
+      if (
+        visitedCells.has(rowKey) ||
+        visitedCells.has(colKey) ||
+        visitedCells.has(boxKey)
+      )
         return false;
 
-      seen.add(rowKey);
-      seen.add(colKey);
-      seen.add(gridKey);
+      visitedCells.add(rowKey);
+      visitedCells.add(colKey);
+      visitedCells.add(boxKey);
     }
   }
 

@@ -1,22 +1,25 @@
 function carFleet(target: number, position: number[], speed: number[]): number {
-  const carSpeed = new Map<number, number>(); // { position, speed }
-  const stack: number[] = [];
+  let stack: number[] = [];
 
+  // Create a populate a map of each car's position to it's speed
+  const carPositionToSpeedMap = new Map<number, number>(); // { position: speed }
   position.forEach((p, i) => {
-    carSpeed.set(p, speed[i]);
+    carPositionToSpeedMap.set(p, speed[i]);
   });
 
+  // Sort the positions in descending order
   position.sort((a, b) => b - a);
 
-  for (let i = 0; i < position.length; i++) {
-    const currentSpeed = carSpeed.get(position[i]) as number;
-    const timeUntilTarget = (target - position[i]) / currentSpeed;
-    const lastTimeInStack = stack[stack.length - 1];
+  // Iterate through all positions, calculating the time each car will take to reach the target.
+  for (let p of position) {
+    const timeToReachTarget = (target - p) / carPositionToSpeedMap.get(p)!;
 
-    if (stack.length === 0 || timeUntilTarget > lastTimeInStack) {
-      stack.push(timeUntilTarget);
+    // If the current time to reach the target is greater than the last in the stack, add it
+    if (!stack.length || timeToReachTarget > stack[stack.length - 1]) {
+      stack.push(timeToReachTarget);
     }
   }
 
+  // Return the length of the stack, which will represent the number of car fleets
   return stack.length;
 }

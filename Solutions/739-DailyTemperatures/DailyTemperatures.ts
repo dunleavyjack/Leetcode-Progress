@@ -10,10 +10,10 @@ function dailyTemperatures(temperatures: number[]): number[] {
     // Pop that value, set the difference to the answer array, and continue to check through the stack
     while (
       stack.length &&
-      temperatures[stack[stack.length - 1]] < temperatures[i]
+      temperatures[i] > temperatures[stack[stack.length - 1]]
     ) {
-      const lastIndexInStack = stack.pop() as number;
-      answer[lastIndexInStack] = i - lastIndexInStack;
+      const colderTempIndex = stack.pop() as number;
+      answer[colderTempIndex] = i - colderTempIndex;
     }
 
     // Always, push the current value to the stack. We haven't found a warmer day for it yet.

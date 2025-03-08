@@ -1,7 +1,7 @@
 function carFleet(target: number, position: number[], speed: number[]): number {
   let stack: number[] = [];
 
-  // Create a populate a map of each car's position to it's speed
+  // Create and populate a map of each car's position to it's speed
   const carPositionToSpeedMap = new Map<number, number>(); // { position: speed }
   position.forEach((p, i) => {
     carPositionToSpeedMap.set(p, speed[i]);

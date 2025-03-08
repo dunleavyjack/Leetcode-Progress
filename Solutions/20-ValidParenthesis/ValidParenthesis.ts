@@ -1,39 +1,44 @@
-enum PAREN {
-  OPEN = "(",
-  CLOSED = ")",
+enum Paren {
+  Open = "(",
+  Closed = ")",
 }
 
-enum SQUARE {
-  OPEN = "[",
-  CLOSED = "]",
+enum SquareBracket {
+  Open = "[",
+  Closed = "]",
 }
 
-enum SQUIGGLE {
-  OPEN = "{",
-  CLOSED = "}",
+enum CurlyBracket {
+  Open = "{",
+  Closed = "}",
 }
 
 function isValid(s: string): boolean {
   let openParens: string[] = [];
 
-  for (let paren of s) {
+  for (let i = 0; i < s.length; i++) {
+    // Always push open parens to the stack
     if (
-      paren === PAREN.OPEN ||
-      paren === SQUARE.OPEN ||
-      paren === SQUIGGLE.OPEN
+      s[i] === Paren.Open ||
+      s[i] === SquareBracket.Open ||
+      s[i] === CurlyBracket.Open
     )
-      openParens.push(paren);
+      openParens.push(s[i]);
     else {
+      // When closed paren is reached, pop last open paren from the stack and compare.
+      // Return false if there is no match, or if stack is empty
       const lastOpenParen = openParens.pop();
       if (
         !lastOpenParen ||
-        (paren === PAREN.CLOSED && lastOpenParen !== PAREN.OPEN) ||
-        (paren === SQUARE.CLOSED && lastOpenParen !== SQUARE.OPEN) ||
-        (paren === SQUIGGLE.CLOSED && lastOpenParen !== SQUIGGLE.OPEN)
+        (s[i] === Paren.Closed && lastOpenParen !== Paren.Open) ||
+        (s[i] === SquareBracket.Closed &&
+          lastOpenParen !== SquareBracket.Open) ||
+        (s[i] === CurlyBracket.Closed && lastOpenParen !== CurlyBracket.Open)
       )
         return false;
     }
   }
 
+  // In cases where there are left over open parens, we want to return false. Otherwise, true!
   return !openParens.length;
 }

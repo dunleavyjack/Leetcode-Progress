@@ -1,35 +1,42 @@
-enum OPERATORS {
-  ADD = "+",
-  SUBTRACT = "-",
-  MULTIPLY = "*",
-  DIVIDE = "/",
+enum Operator {
+  Addition = "+",
+  Subtraction = "-",
+  Multiplication = "*",
+  Division = "/",
 }
 
 function evalRPN(tokens: string[]): number {
-  let numStack: number[] = [];
+  const numStack: number[] = [];
 
-  for (let token of tokens) {
-    if (isNumber(token)) {
+  for (const token of tokens) {
+    if (!isOperator(token)) {
       numStack.push(Number(token));
-    } else {
-      const secondNum = numStack.pop() as number;
-      const firstNum = numStack.pop() as number;
+      continue;
+    }
 
-      if (token === OPERATORS.ADD) {
-        numStack.push(firstNum + secondNum);
-      } else if (token === OPERATORS.SUBTRACT) {
-        numStack.push(firstNum - secondNum);
-      } else if (token === OPERATORS.DIVIDE) {
-        numStack.push(Math.trunc(firstNum / secondNum));
-      } else if ((token = OPERATORS.MULTIPLY)) {
-        numStack.push(firstNum * secondNum);
-      }
+    const numTwo = numStack.pop() as number;
+    const numOne = numStack.pop() as number;
+
+    if (token === Operator.Addition) {
+      numStack.push(numOne + numTwo);
+    } else if (token === Operator.Subtraction) {
+      numStack.push(numOne - numTwo);
+    } else if (token === Operator.Multiplication) {
+      numStack.push(numOne * numTwo);
+    } else {
+      numStack.push(Math.trunc(numOne / numTwo));
     }
   }
 
   return numStack[0];
 }
 
-function isNumber(char: string) {
-  return !isNaN(Number(char));
+function isOperator(token: string) {
+  if (
+    token === Operator.Addition ||
+    token === Operator.Subtraction ||
+    token === Operator.Multiplication ||
+    token === Operator.Division
+  )
+    return true;
 }

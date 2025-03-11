@@ -1,11 +1,11 @@
 function searchMatrix(matrix: number[][], target: number): boolean {
   // Iterate through the rows of the matrix
   for (let row of matrix) {
-    // If the target is larger than the last value in the row, it can be skipped
-    if (target > row[row.length - 1]) continue;
-
-    // Perform binary search to find if the value exists.
-    return binarySearch(row, target);
+    // Check if the target is in the row
+    const lastValInRow = row[row.length - 1];
+    if (lastValInRow >= target) {
+      return binarySearch(row, target);
+    }
   }
 
   // Return false by default

@@ -1,17 +1,15 @@
 # Explanation
 
 For this one, a modified binary search can be used to find the minimum.
-You want to look out for a condition where the mid point is greater than
-the right-most point. If this case is true, that means the right side
-will contain the smallest value.
 
-## Tip
+The idea is to check if the right side is sorted. This means, the minimum is on
+the left side, inclusive of `nums[mid]`, which could also be the minimum). So
+when you bring the right pointer inward, set it to `mid` without decrementing by
+`-1` as is usual for binary search.
 
-There are two main differences to a normal binary search.
+Otherwise, the min must be on the right side! Bring the left pointer inward like
+usual. Finally, return the value at the left pointer.
 
-1. The while condition should be `left < right` and **not** `left <= right`.
-2. When bringing in the right side, don't set `right` to `mid - 1`, only `mid`.
-
-In a normal binary search, we know exactly what number to look for.
-With this problem, we are instead looking for the pivot where smallest
-value in the array will exist.
+| Time     | Space |
+| -------- | ----- |
+| O(log n) | O(1)  |

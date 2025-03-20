@@ -1,28 +1,27 @@
 function lengthOfLongestSubstring(s: string): number {
-  // Create a set to keep track of unique chars, and a max value to store the result.
-  const uniqueChars = new Set<string>();
-  let max = 0;
+  // Set to keep track of uniqueChars in each substring
+  const uniqueSubstring = new Set<string>();
 
-  // Two pointers, left and right.
+  let maxLength = 0;
   let left = 0;
   let right = 0;
 
-  // Iterate until right is out of bounds.
+  // Iterate through all right elements
   while (right < s.length) {
-    // First, check to see if this char is already in the set.
-    // If it does, keep deleting and incrementing the left value.
-    while (uniqueChars.has(s[right])) {
-      uniqueChars.delete(s[left]);
+    // (Non-intuitive) Check to see if the set contains the current right value.
+    // If so, keep removing elements from set until this is not the case.
+    while (uniqueSubstring.has(s[right])) {
+      uniqueSubstring.delete(s[left]);
       left++;
     }
 
-    // "Happy path". Add the right value to the set and compare the total length with the max.
-    uniqueChars.add(s[right]);
-    max = Math.max(right - left + 1, max);
-
+    // Always add the right element,
+    // compare if the current substring is greater than the current,
+    // and increment the right pointer.
+    uniqueSubstring.add(s[right]);
+    maxLength = Math.max(maxLength, uniqueSubstring.size);
     right++;
   }
 
-  // Return the result.
-  return max;
+  return maxLength;
 }

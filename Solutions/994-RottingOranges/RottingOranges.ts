@@ -1,7 +1,9 @@
 function orangesRotting(grid: number[][]): number {
-  let freshOranges = 0;
-  let rottenOrangeCoords: number[][] = [];
-  let minutes = 0;
+  let rows = grid.length;
+  let cols = grid[0].length;
+
+  let freshOrangesCount = 0;
+  let queue: [number, number][] = [];
 
   const directions = [
     [-1, 0],
@@ -10,38 +12,42 @@ function orangesRotting(grid: number[][]): number {
     [0, 1],
   ] as const;
 
-  for (let r = 0; r < grid.length; r++) {
-    for (let c = 0; c < grid[0].length; c++) {
-      if (grid[r][c] === 2) rottenOrangeCoords.push([r, c]);
-      else if (grid[r][c] === 1) freshOranges++;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (grid[r][c] === 2) {
+        queue.push([r, c]);
+      } else if (grid[r][c] === 1) {
+        freshOrangesCount++;
+      }
     }
   }
 
-  while (rottenOrangeCoords.length && freshOranges > 0) {
-    const currentLevelSize = rottenOrangeCoords.length;
-    for (let i = 0; i < currentLevelSize; i++) {
-      const [row, col] = rottenOrangeCoords.shift()!;
+  let time = 0;
+  while (queue.length && freshOrangesCount > 0) {
+    const currentLength = queue.length;
+    for (let i = 0; i < currentLength; i++) {
+      const [originalRow, originalCol] = queue.shift()!;
 
-      for (const [rowDirection, colDirection] of directions) {
-        const newRow = row + rowDirection;
-        const newCol = col + colDirection;
+      for (const [dr, dc] of directions) {
+        const newRow = originalRow + dr;
+        const newCol = originalCol + dc;
+
         if (
           newRow < 0 ||
           newCol < 0 ||
-          newRow >= grid.length ||
-          newCol >= grid[0].length ||
-          grid[newRow][newCol] !== 1 // Is not a fresh orange
+          newRow >= rows ||
+          newCol >= cols ||
+          grid[newRow][newCol] !== 1
         )
           continue;
 
-        grid[newRow][newCol] = 2; // Make rotten
-        freshOranges--; // Decrement fresh orange count
-        rottenOrangeCoords.push([newRow, newCol]); // Add to rotten oranges queue
+        grid[newRow][newCol] = 2;
+        freshOrangesCount--;
+        queue.push([newRow, newCol]);
       }
     }
-
-    minutes++;
+    time++;
   }
 
-  return !freshOranges ? minutes : -1;
+  return freshOrangesCount ? -1 : time;
 }

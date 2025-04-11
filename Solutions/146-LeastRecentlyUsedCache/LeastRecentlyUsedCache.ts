@@ -1,78 +1,66 @@
-class DoublyLinkedListNode {
-  key: number;
-  val: number;
+class DLListNode {
+  prev: DLListNode | null = null;
+  next: DLListNode | null = null;
 
-  prev: DoublyLinkedListNode | null;
-  next: DoublyLinkedListNode | null;
-
-  constructor(key: number, val: number) {
-    this.key = key;
-    this.val = val;
-
-    this.prev = null;
-    this.next = null;
-  }
+  constructor(
+    public key: number,
+    public value: number,
+  ) {}
 }
 
 class LRUCache {
-  cache: Map<number, DoublyLinkedListNode>; // { key, node }
-  capacity: number;
+  cache: Map<number, DLListNode> = new Map();
+  dummyLeft = new DLListNode(0, 0);
+  dummyRight = new DLListNode(0, 0);
 
-  left: DoublyLinkedListNode;
-  right: DoublyLinkedListNode;
-
-  constructor(capacity: number) {
-    this.cache = new Map();
-    this.capacity = capacity;
-
-    this.left = new DoublyLinkedListNode(0, 0);
-    this.right = new DoublyLinkedListNode(0, 0);
-
-    this.left.next = this.right;
-    this.right.prev = this.left;
+  constructor(public capacity: number) {
+    this.dummyLeft.next = this.dummyRight;
+    this.dummyRight.prev = this.dummyLeft;
   }
 
   get(key: number): number {
-    if (this.cache.has(key)) {
-      const node = this.cache.get(key)!;
-      this.removeNode(node);
-      this.insertNodeAtEnd(node);
+    if (!this.cache.has(key)) return -1;
 
-      return node.val;
-    } else {
-      return -1;
-    }
+    const node = this.cache.get(key)!;
+    this.removeNodeFromList(node);
+    this.insertNodeAtEndOfList(node);
+
+    return node.value;
   }
 
   put(key: number, value: number): void {
     if (this.cache.has(key)) {
-      this.removeNode(this.cache.get(key)!);
+      const node = this.cache.get(key)!;
+      this.removeNodeFromList(node);
     }
 
-    const newNode = new DoublyLinkedListNode(key, value);
+    const newNode = new DLListNode(key, value);
     this.cache.set(key, newNode);
-    this.insertNodeAtEnd(newNode);
+    this.insertNodeAtEndOfList(newNode);
 
     if (this.cache.size > this.capacity) {
-      const leastRecentlyUsed = this.left.next!;
-      this.removeNode(leastRecentlyUsed);
-      this.cache.delete(leastRecentlyUsed.key);
+      const lruNode = this.dummyLeft.next!;
+      this.removeNodeFromList(lruNode);
+      this.cache.delete(lruNode.key);
     }
   }
 
-  private insertNodeAtEnd(node: DoublyLinkedListNode) {
-    const [prevNode, rightNode] = [this.right.prev!, this.right];
-    prevNode.next = node;
-    node.prev = prevNode;
+  private removeNodeFromList(node: DLListNode) {
+    const prevNode = node.prev!;
+    const nextNode = node.next!;
 
-    rightNode.prev = node;
-    node.next = rightNode;
-  }
-
-  private removeNode(node: DoublyLinkedListNode) {
-    const [prevNode, nextNode] = [node.prev!, node.next!];
     prevNode.next = nextNode;
     nextNode.prev = prevNode;
+  }
+
+  private insertNodeAtEndOfList(node: DLListNode) {
+    const lastRealNode = this.dummyRight.prev!;
+
+    lastRealNode.next = node;
+    this.dummyRight.prev = node;
+
+    node.next = this.dummyRight;
+    node.prev = lastRealNode;
   }
 }
 

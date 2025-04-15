@@ -4,13 +4,13 @@ export function lowestCommonAncestor(
   p: _Node | null,
   q: _Node | null,
 ): _Node | null {
-  let p1 = p;
-  let p2 = q;
+  let pointerOne = p;
+  let pointerTwo = q;
 
-  while (p1 !== p2) {
-    p1 = p1 ? p1.parent : q;
-    p2 = p2 ? p2.parent : p;
+  while (pointerOne !== pointerTwo) {
+    pointerOne = pointerOne?.parent || q;
+    pointerTwo = pointerTwo?.parent || p;
   }
 
-  return p1;
+  return pointerOne;
 }

@@ -25,3 +25,7 @@ const boxNumber = Math.floor(row / 3) * 3 + Math.floor(col / 3);
 So, at each iteration, you need to create three signatures for each cell and
 check to see if those signatures already exist in the set. If they do, return
 `false`. Otherwise, return `true`!
+
+| Time | Space |
+| ---- | ----- |
+| O(n) | O(n)  |

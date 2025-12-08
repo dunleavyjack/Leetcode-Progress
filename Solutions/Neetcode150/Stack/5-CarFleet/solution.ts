@@ -8,10 +8,13 @@ function carFleet(target: number, position: number[], speed: number[]): number {
   const fleetStack: number[] = [];
 
   for (const position of positionDescendingOrder) {
-    const arrivalTime = (target - position) / positionToSpeed.get(position)!;
+    const timeToTarget = (target - position) / positionToSpeed.get(position)!;
 
-    if (!fleetStack.length || fleetStack[fleetStack.length - 1] < arrivalTime) {
-      fleetStack.push(arrivalTime);
+    if (
+      !fleetStack.length ||
+      fleetStack[fleetStack.length - 1] < timeToTarget
+    ) {
+      fleetStack.push(timeToTarget);
     }
   }
 

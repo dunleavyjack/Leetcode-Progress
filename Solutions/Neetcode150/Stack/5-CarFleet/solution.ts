@@ -1,4 +1,8 @@
-function carFleet(target: number, position: number[], speed: number[]): number {
+export function carFleet(
+  target: number,
+  position: number[],
+  speed: number[],
+): number {
   const positionToSpeed = new Map<number, number>(); // { position: speedAtThatPosition }
   for (let i = 0; i < position.length; i++) {
     positionToSpeed.set(position[i], speed[i]);

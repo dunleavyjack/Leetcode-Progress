@@ -1,23 +1,23 @@
 function minEatingSpeed(piles: number[], h: number): number {
-  let minSpeed = 0;
-  let maxSpeed = Math.max(...piles);
+  let low = 0;
+  let high = Math.max(...piles);
 
-  let bestSpeed = maxSpeed;
+  let best = high;
 
-  while (minSpeed <= maxSpeed) {
-    const speed = Math.floor((maxSpeed + minSpeed) / 2);
-
+  while (low <= high) {
+    const mid = Math.floor((high + low) / 2);
     const hoursToEatBananas = piles.reduce(
-      (total, pile) => total + Math.ceil(pile / speed),
+      (total, pile) => total + Math.ceil(pile / mid),
       0,
     );
+
     if (hoursToEatBananas <= h) {
-      bestSpeed = Math.min(bestSpeed, speed);
-      maxSpeed = speed - 1;
+      high = mid - 1;
+      best = mid;
     } else {
-      minSpeed = speed + 1;
+      low = mid + 1;
     }
   }
 
-  return bestSpeed;
+  return best;
 }

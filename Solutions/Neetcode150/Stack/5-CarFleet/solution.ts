@@ -3,24 +3,22 @@ export function carFleet(
   position: number[],
   speed: number[],
 ): number {
-  const positionToSpeed = new Map<number, number>(); // { position: speedAtThatPosition }
-  for (let i = 0; i < position.length; i++) {
-    positionToSpeed.set(position[i], speed[i]);
-  }
+  const positionToSpeed = new Map<number, number>();
+  position.forEach((position, i) => {
+    positionToSpeed.set(position, speed[i]);
+  });
 
-  const positionDescendingOrder = position.sort((a, b) => b - a);
-  const fleetStack: number[] = [];
+  const positionsSortedDecreasing = position.sort((a, b) => b - a);
+  let fleets: number[] = [];
 
-  for (const position of positionDescendingOrder) {
-    const timeToTarget = (target - position) / positionToSpeed.get(position)!;
+  for (const position of positionsSortedDecreasing) {
+    const speedOfCar = positionToSpeed.get(position)!;
+    const timeToTarget = (target - position) / speedOfCar;
 
-    if (
-      !fleetStack.length ||
-      fleetStack[fleetStack.length - 1] < timeToTarget
-    ) {
-      fleetStack.push(timeToTarget);
+    if (!fleets.length || fleets[fleets.length - 1] < timeToTarget) {
+      fleets.push(timeToTarget);
     }
   }
 
-  return fleetStack.length;
+  return fleets.length;
 }

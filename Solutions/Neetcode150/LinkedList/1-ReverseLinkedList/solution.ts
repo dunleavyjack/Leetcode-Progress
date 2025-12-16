@@ -1,14 +1,14 @@
 import { ListNode } from "../../../../Types/ListNode/ListNode";
 
 export function reverseList(head: ListNode | null): ListNode | null {
-  let prev: ListNode | null = null;
   let curr = head;
+  let prev: ListNode | null = null;
 
   while (curr) {
-    const temp = curr.next;
+    const next = curr.next;
     curr.next = prev;
     prev = curr;
-    curr = temp;
+    curr = next;
   }
 
   return prev;

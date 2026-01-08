@@ -1,4 +1,4 @@
-function checkInclusion(s1: string, s2: string): boolean {
+export function checkInclusion(s1: string, s2: string): boolean {
   if (s1.length > s2.length) return false;
 
   let s1Freq = new Map<string, number>();

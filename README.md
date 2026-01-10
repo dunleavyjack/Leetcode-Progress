@@ -2,7 +2,7 @@
 
 Just tracking personal progress for LeetCode 🏄‍♂️🏄‍♂️.
 
-Mostly in TypeScript an Python, but also Go, Kotlin, Java, C#, and a few others for fun.
+Mostly in TypeScript an Python, but also Go, Kotlin, Java, C#, and a few others I use at work for fun.
 
 My [Leetcode Account](https://leetcode.com/jack_joseph/) :)
 

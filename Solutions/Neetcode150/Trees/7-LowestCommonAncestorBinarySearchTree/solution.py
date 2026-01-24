@@ -3,18 +3,15 @@ from Types.TreeNode.TreeNode import TreeNode
 
 class Solution:
     def lowestCommonAncestor(
-        self, root: TreeNode | None, p: TreeNode, q: TreeNode
-    ) -> TreeNode | None:
-        if root is None:
+        self, root: None | TreeNode, p: "TreeNode", q: "TreeNode" | None
+    ) -> "TreeNode":
+        if not root:
             return None
 
-        if root == p or root == q:
-            return root
+        if p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
 
-        valid_left = self.lowestCommonAncestor(root.left, p, q)
-        valid_right = self.lowestCommonAncestor(root.right, p, q)
+        if p.val < root.val and q.val < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
 
-        if valid_left and valid_right:
-            return root
-        else:
-            return valid_left or valid_right
+        return root

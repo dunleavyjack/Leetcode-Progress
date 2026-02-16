@@ -17,4 +17,5 @@ class Solution:
             n += 1
             if n == k:
                 return curr.val
+
             curr = curr.right

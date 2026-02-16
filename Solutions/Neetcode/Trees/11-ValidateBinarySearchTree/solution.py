@@ -4,7 +4,9 @@ from Types.TreeNode.TreeNode import TreeNode
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        return self.isValid(root, float("-inf"), float("inf"))
+        MIN_VAL, MAX_VAL = float("-inf"), float("inf")
+
+        return self.isValid(root, MIN_VAL, MAX_VAL)
 
     def isValid(self, node, min_val, max_val):
         if not node:

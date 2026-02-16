@@ -1,25 +1,30 @@
-class Solution(object):
-    def isSubtree(self, root, subRoot):
-        """
-        :type root: Optional[TreeNode]
-        :type subRoot: Optional[TreeNode]
-        :rtype: bool
-        """
+from typing import Optional
+from Types.TreeNode.TreeNode import TreeNode
+
+
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
         if not root:
             return False
+
+        if not subRoot:
+            return True
 
         if root.val == subRoot.val and self.isSameTree(root, subRoot):
             return True
 
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+        is_left_subtree = self.isSubtree(root.left, subRoot)
+        is_right_subtree = self.isSubtree(root.right, subRoot)
 
-    def isSameTree(self, p, q):
-        if not p and not q:
+        return is_left_subtree or is_right_subtree
+
+    def isSameTree(self, a, b):
+        if not a and not b:
             return True
-        if not p or not q or p.val != q.val:
+        if not a or not b or a.val != b.val:
             return False
 
-        is_same_left = self.isSameTree(p.left, q.left)
-        is_same_right = self.isSameTree(p.right, q.right)
+        same_left = self.isSameTree(a.left, b.left)
+        same_right = self.isSameTree(a.right, b.right)
 
-        return is_same_left and is_same_right
+        return same_left and same_right

@@ -1,13 +1,8 @@
-from typing import Optional
 from Types.TreeNode.TreeNode import TreeNode
 
 
 class Solution:
-    def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        # Not required for solution, but if no root return -1
-        if not root:
-            return -1
-
+    def maxPathSum(self, root: TreeNode) -> int:
         # Use the first index of an array to store root so it can be accessed in the dfs
         res = [root.val]
 

@@ -3,27 +3,27 @@ from typing import List
 
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        if len(edges) > (n - 1):
+        if len(edges) != n - 1:
             return False
 
-        neighbors = [[] for _ in range(n)]
+        adj = [[] for _ in range(n)]
+        for n1, n2 in edges:
+            adj[n1].append(n2)
+            adj[n2].append(n1)
 
-        for node, neighbor in edges:
-            neighbors[node].append(neighbor)
-            neighbors[neighbor].append(node)
-
-        visit = set()
+        seen = set()
 
         def dfs(node, parent):
-            if node in visit:
+            if node in seen:
                 return False
 
-            visit.add(node)
-            for n in neighbors[node]:
+            seen.add(node)
+            for n in adj[node]:
                 if n == parent:
                     continue
-                if not dfs(n, node):
+                valid = dfs(n, node)
+                if not valid:
                     return False
             return True
 
-        return dfs(0, -1) and len(visit) == n
+        return dfs(0, -1) and len(seen) == n

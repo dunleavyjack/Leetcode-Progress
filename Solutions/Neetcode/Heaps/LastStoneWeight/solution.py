@@ -4,16 +4,16 @@ from typing import List
 
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        heap = [-s for s in stones]
-        heapify(heap)
+        max_heap = [-s for s in stones]
+        heapify(max_heap)
 
-        while len(heap) > 1:
-            y = heappop(heap)
-            x = heappop(heap)
+        while len(max_heap) > 1:
+            y = heappop(max_heap)
+            x = heappop(max_heap)
 
             if x == y:
                 continue
 
-            heappush(heap, y - x)
+            heappush(max_heap, y - x)
 
-        return -heap[0] if heap else 0
+        return -max_heap[0] if max_heap else 0

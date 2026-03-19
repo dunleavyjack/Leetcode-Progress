@@ -4,14 +4,14 @@ from heapq import heappop, heappush
 
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        intervals.sort(key=lambda interval: interval[0])
+        intervals.sort(key=lambda i: i[0])
 
-        heap = [intervals[0][1]]  # end times
+        rooms = [intervals[0][1]]  # min heap of room end times for concurrent meetings
 
         for start, end in intervals[1:]:
-            if heap and heap[0] <= start:
-                heappop(heap)
+            if rooms and start >= rooms[0]:
+                heappop(rooms)
 
-            heappush(heap, end)
+            heappush(rooms, end)
 
-        return len(heap)
+        return len(rooms)

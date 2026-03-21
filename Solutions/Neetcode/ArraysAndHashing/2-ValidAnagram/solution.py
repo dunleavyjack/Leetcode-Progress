@@ -1,17 +1,19 @@
+from collections import defaultdict
+
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        sFreq = {}
-        tFreq = {}
-
         if len(s) != len(t):
             return False
 
-        for i in range(len(s)):
-            sFreq[s[i]] = sFreq.get(s[i], 0) + 1
-            tFreq[t[i]] = tFreq.get(t[i], 0) + 1
+        count = defaultdict(int)
 
-        for char, freq in sFreq.items():
-            if freq != tFreq.get(char):
+        for i in range(len(s)):
+            count[s[i]] += 1
+            count[t[i]] -= 1
+
+        for freq in count.values():
+            if freq != 0:
                 return False
 
         return True

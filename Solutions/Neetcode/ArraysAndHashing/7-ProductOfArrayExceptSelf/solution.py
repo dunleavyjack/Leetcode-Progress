@@ -3,16 +3,16 @@ from typing import List
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        result = [1] * len(nums)
+        products = []
 
-        prefix_product = 1
-        for i in range(len(nums)):
-            result[i] = prefix_product
-            prefix_product *= nums[i]
+        prefix = 1
+        for num in nums:
+            products.append(prefix)
+            prefix *= num
 
-        postfix_product = 1
+        postfix = 1
         for i in range(len(nums) - 1, -1, -1):
-            result[i] *= postfix_product
-            postfix_product *= nums[i]
+            products[i] *= postfix
+            postfix *= nums[i]
 
-        return result
+        return products
